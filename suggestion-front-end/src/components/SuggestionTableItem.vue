@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
     export default {
     name: 'suggestion-table-item',
         components: {
@@ -30,7 +29,10 @@
         },
         computed: {
             addressLink(){
-                return 'https://www.google.com/maps'
+                if(this.result.latitude && this.result.longitude)
+                    return `https://www.google.com/maps/search/?api=1&query=${this.result.latitude},${this.result.longitude}`
+                else
+                    return 'https://www.google.com/maps'
             }
         }
     }
