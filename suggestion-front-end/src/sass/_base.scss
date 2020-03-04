@@ -1,4 +1,31 @@
-$top-padding: 150px;
+html, body,
+h1, h2, h3, h4, h5, h6,
+a, p, span,
+em, small, strong,
+sub, sup,
+mark, del, ins, strike,
+abbr, dfn,
+blockquote, q, cite,
+code, pre,
+ol, ul, li, dl, dt, dd,
+div, section, article,
+main, aside, nav,
+header, hgroup, footer,
+img, figure, figcaption,
+address, time,
+audio, video,
+canvas, iframe,
+details, summary,
+fieldset, form, label, legend,
+table, caption,
+tbody, tfoot, thead,
+tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+
 
 body{
     font-family: 'Source Sans Pro', sans-serif;
@@ -7,54 +34,3 @@ body{
 html, body {
     height: 100vh;
 }
-
-.page-container, .landing-container{
-    height: calc(100vh - 200);
-}
-
-.landing-container{
-    
-    .page-title{
-        padding-left: 10px;
-    }
-
-    .page-container{
-        display: flex;
-        justify-content: space-around;
-
-        padding-top: $top-padding;
-
-        .search-container, .results-container{
-            width: 50%;
-        }
-
-        .search-container{
-            display: flex;
-            justify-content: center;
-
-            .search-box-container{
-                width: 75%;
-                h3{
-                    font-size: 36px;
-                }
-    
-                #suggestion-search{
-                    width: 75%;
-                    font-size: 28px;
-                    border: 1px solid gray;
-                    border-radius: 25px;
-                    padding: 12px;
-                    background: whitesmoke;
-                    font-family: 'Source Sans Pro', sans-serif;
-                    font-weight: 600;
-                }
-    
-            }
-        }
-
-        .results-container{
-           
-        }
-       
-    }
-}   

@@ -17,6 +17,11 @@
         props: {
 
         },
+        watch: {
+            query: function (val) {
+                this.$emit('queryChanged', val)
+            }
+        },
         data(){
             return {
                 query: ""

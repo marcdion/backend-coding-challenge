@@ -1,0 +1,19 @@
+.suggestion-table{
+    thead th{
+        border-bottom: 1px solid #dee2e6;
+    }
+}
+.suggestion-table-item{
+    border-bottom: 1px solid #dee2e6;
+    .suggestion-item-link{
+        color: black;
+
+        th:first-child{
+            border-top: none;
+        }
+    }
+}
+
+.no-results-to-show{
+    font-weight: 600;
+}

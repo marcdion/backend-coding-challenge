@@ -27,6 +27,13 @@ namespace SuggestionApi.Web.Controllers
                     Latitude = 42.98339,
                     Longitude = -81.23304,
                     Score = 0.9
+                },
+                new SuggestionDto
+                {
+                    Name = "Victoria, BC, Canada",
+                    Latitude = 42.98339,
+                    Longitude = -81.23304,
+                    Score = 0.9
                 }
             };
         }
