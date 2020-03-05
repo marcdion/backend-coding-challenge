@@ -4,6 +4,10 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Domain\Helpers" />
+    <Folder Include="Appplication\Seed" />
+    <Folder Include="Domain\Enums" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="15.0.1" />
   </ItemGroup>
 </Project>

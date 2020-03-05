@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SuggestionApi.Appplication.Seed;
+using SuggestionApi.Domain.Helpers;
 
 namespace SuggestionApi.Web.Startup
 {
@@ -27,6 +29,9 @@ namespace SuggestionApi.Web.Startup
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
+            
+            //Adding services
+            services.AddSingleton<ISeedDomainService, SeedDomainService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
