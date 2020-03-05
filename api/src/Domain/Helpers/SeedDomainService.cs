@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AutoMapper;
 using CsvHelper;
 using SuggestionApi.Domain.Models;
 
@@ -12,17 +13,18 @@ namespace SuggestionApi.Domain.Helpers
     public class SeedDomainService : ISeedDomainService
     {
         private readonly SharedTrie _trie;
+        private readonly IMapper _mapper;
 
-        public SeedDomainService(SharedTrie trie)
+        public SeedDomainService(SharedTrie trie, IMapper mapper)
         {
             _trie = trie;
+            _mapper = mapper;
         }
 
         const string geoFileName = "cities_canada-usa.tsv";
 
         public void SeedPrefixTree()
         {
-            System.Threading.Thread.Sleep(10000);
             using (var reader = new StreamReader(@$"..\..\api\src\Domain\DataSource\{geoFileName}"))
             {
                 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
@@ -34,8 +36,8 @@ namespace SuggestionApi.Domain.Helpers
                 var orderedGeoNames = geoNames.OrderByDescending(q => q.Population).ToList();
                 var avg = orderedGeoNames.Select(x => x.Population).DefaultIfEmpty(0).Average();
 
-                foreach (var optimizedString in orderedGeoNames.Select(geoName => Regex.Replace(geoName.Name, @"\s+", "").ToLower()))
-                    _trie.Trie.Insert(optimizedString);
+                foreach (var geoName in orderedGeoNames)
+                    _trie.Trie.Insert(_mapper.Map<GeoName>(geoName));
             }
         }
     }

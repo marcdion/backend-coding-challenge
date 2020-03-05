@@ -7,6 +7,7 @@ namespace SuggestionApi.Domain.Models
     {
         public char Value { get; set; }
         public List<Node> Children { get; set; }
+        public List<GeoName> GeoNames { get; set; }
         public Node Parent { get; set; }
         public int Depth { get; set; }
         
@@ -18,6 +19,7 @@ namespace SuggestionApi.Domain.Models
         {
             Value = value;
             Children = new List<Node>();
+            GeoNames = new List<GeoName>();
             Depth = depth;
             Parent = parent;
         }

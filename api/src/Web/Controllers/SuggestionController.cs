@@ -2,6 +2,7 @@
 using DefaultNamespace;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SuggestionApi.Domain.Models;
 
 namespace SuggestionApi.Web.Controllers
 {
@@ -10,15 +11,20 @@ namespace SuggestionApi.Web.Controllers
     public class SuggestionController : ControllerBase
     {
         private readonly ILogger<SuggestionController> _logger;
+        private readonly SharedTrie _trie;
 
-        public SuggestionController(ILogger<SuggestionController> logger)
+        public SuggestionController(ILogger<SuggestionController> logger, 
+            SharedTrie trie)
         {
             _logger = logger;
+            _trie = trie;
         }
 
         [HttpGet]        
         public List<SuggestionDto> GetSuggestions(string q)
         {
+            var results = _trie.Trie.GetSuggestionsForPrefix(q);
+
             return new List<SuggestionDto>
             {
                 new SuggestionDto
