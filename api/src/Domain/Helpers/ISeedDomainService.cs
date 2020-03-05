@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using SuggestionApi.Domain.Models;
-
-namespace SuggestionApi.Appplication.Seed
+namespace SuggestionApi.Domain.Helpers
 {
     public interface ISeedDomainService
     {
-        void SeedPrefixTree(IEnumerable<GeoNameInput> geoNames);
+        void SeedPrefixTree();
     }
 }
