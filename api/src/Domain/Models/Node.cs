@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SuggestionApi.Domain.Models
 {
@@ -8,6 +9,10 @@ namespace SuggestionApi.Domain.Models
         public List<Node> Children { get; set; }
         public Node Parent { get; set; }
         public int Depth { get; set; }
+        
+        // Rider suggests .Any() but Count() is quicker since it 
+        // is directly implemented in List<T>
+        public bool IsLeaf => Children.Count() == 0;
 
         public Node(char value, int depth, Node parent)
         {
@@ -15,11 +20,6 @@ namespace SuggestionApi.Domain.Models
             Children = new List<Node>();
             Depth = depth;
             Parent = parent;
-        }
-
-        public bool IsLeaf()
-        {
-            return Children.Count == 0;
         }
 
         public Node FindChildNode(char c)

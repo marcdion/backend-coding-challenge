@@ -1,6 +1,6 @@
 namespace SuggestionApi.Domain.Models
 {
-    //See ADR-003 for why I chose a Trie structure
+    //See ADR-003 for why I chose a Trie data structure
     public class Trie
     {
         private readonly Node _root;
@@ -44,8 +44,6 @@ namespace SuggestionApi.Domain.Models
                 current.Children.Add(newNode);
                 current = newNode;
             }
-
-            current.Children.Add(new Node('$', current.Depth + 1, current));
         }
     }
 }
