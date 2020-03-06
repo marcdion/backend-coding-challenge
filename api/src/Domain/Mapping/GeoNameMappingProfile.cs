@@ -10,6 +10,7 @@ namespace SuggestionApi.Domain.Mapping
         {
             CreateMap<LocationInput, Location>()
                 .ForMember(b => b.Name, map => map.MapFrom(b => b.Name.Trim()))
+                .ForMember(b => b.Country, map => map.MapFrom(b => MapCountry(b.Country)))
                 .ForMember(b => b.AdministrativeRegion, map => map.MapFrom(b => MapAdministrativeRegion(b.AdministrativeRegion)));
         }
 
@@ -43,6 +44,19 @@ namespace SuggestionApi.Domain.Mapping
                     return "NT";
                 case "14":
                     return "NU";
+                default:
+                    return s;
+            }
+        }
+
+        public string MapCountry(string s)
+        {
+            switch (s)
+            {
+                case "US":
+                    return "USA";
+                case "CA":
+                    return "Canada";
                 default:
                     return s;
             }

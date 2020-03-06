@@ -12,6 +12,7 @@ namespace SuggestionApi.Domain.Models.DataStructure
         public Node Parent { get; set; }
         public int Depth { get; set; }
         public int Popularity { get; set; }
+        public bool IsWord { get; set; }
 
         public Node(char value, int depth, Node parent)
         {
@@ -20,7 +21,7 @@ namespace SuggestionApi.Domain.Models.DataStructure
             Locations = new List<LocationLean>();
             Depth = depth;
             Parent = parent;
-            Popularity = 0;
+            Popularity = 1;
         }
 
         public Node FindChildNode(char c)
@@ -30,13 +31,6 @@ namespace SuggestionApi.Domain.Models.DataStructure
                     return child;
 
             return null;
-        }
-
-        public bool IsLeaf()
-        {
-            // ReSharper suggests .Any() but Count() is quicker since it 
-            // is directly implemented in List<T>
-            return Children.Count() == 0;
         }
     }
 }

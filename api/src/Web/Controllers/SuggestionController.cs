@@ -25,6 +25,9 @@ namespace SuggestionApi.Web.Controllers
         [HttpGet]        
         public List<Suggestion> GetSuggestions(string q)
         {
+            if(string.IsNullOrEmpty(q))
+                return new List<Suggestion>();
+                
             var results = _trie.Trie.GetSuggestionsForPrefix(q);
             return results.ToList();
         }

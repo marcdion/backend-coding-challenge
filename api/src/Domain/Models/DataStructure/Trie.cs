@@ -41,7 +41,8 @@ namespace SuggestionApi.Domain.Models.DataStructure
                 current.Children.Add(newNode);
                 current = newNode;
             }
-            
+
+            current.IsWord = true;
             current.Locations.Add(new LocationLean(current, val.Latitude, val.Longitude, val.Country, val.AdministrativeRegion, CalculateBaseScore(val.Population, avg)));;
         }
 
@@ -85,7 +86,7 @@ namespace SuggestionApi.Domain.Models.DataStructure
 
         private void FindAllChildWords(Node n, ICollection<Node> wordNodes)
         {
-            if(n.IsLeaf())
+            if(n.IsWord)
                 wordNodes.Add(n);
 
             foreach (var node in n.Children)
