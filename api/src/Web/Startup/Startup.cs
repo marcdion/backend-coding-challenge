@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuggestionApi.Domain.Helpers;
+using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models;
+using SuggestionApi.Domain.Models.DataStructure;
+using SuggestionApi.Domain.Models.ScoringWeights;
 
 namespace SuggestionApi.Web.Startup
 {
@@ -35,6 +38,7 @@ namespace SuggestionApi.Web.Startup
             //Adding services
             services.AddSingleton<ISeedDomainService, SeedDomainService>();
             services.AddSingleton<SharedTrie>();
+            services.AddSingleton<SharedScoringWeight>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

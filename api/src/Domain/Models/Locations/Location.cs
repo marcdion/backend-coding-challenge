@@ -1,6 +1,6 @@
-namespace SuggestionApi.Domain.Models
+namespace SuggestionApi.Domain.Models.Locations
 {
-    public class GeoName
+    public class Location
     {
         public string Name { get; set; }
 

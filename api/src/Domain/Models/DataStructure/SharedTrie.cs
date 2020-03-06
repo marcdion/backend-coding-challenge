@@ -1,4 +1,4 @@
-namespace SuggestionApi.Domain.Models
+namespace SuggestionApi.Domain.Models.DataStructure
 {
     public class SharedTrie
     {

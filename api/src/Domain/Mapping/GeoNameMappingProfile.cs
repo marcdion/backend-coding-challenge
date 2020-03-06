@@ -1,5 +1,6 @@
 using AutoMapper;
 using SuggestionApi.Domain.Models;
+using SuggestionApi.Domain.Models.Locations;
 
 namespace SuggestionApi.Domain.Mapping
 {
@@ -7,8 +8,8 @@ namespace SuggestionApi.Domain.Mapping
     {
         public GeoNameMappingProfile()
         {
-            CreateMap<GeoNameInput, GeoName>()
-                .ForMember(b => b.Name, map => map.MapFrom(b => b.Name.Trim().ToLower()))
+            CreateMap<LocationInput, Location>()
+                .ForMember(b => b.Name, map => map.MapFrom(b => b.Name.Trim()))
                 .ForMember(b => b.AdministrativeRegion, map => map.MapFrom(b => MapAdministrativeRegion(b.AdministrativeRegion)));
         }
 

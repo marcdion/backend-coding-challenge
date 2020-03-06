@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SuggestionApi.Domain.Helpers;
+using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models;
 
 namespace SuggestionApi.Web.Startup
@@ -27,6 +28,8 @@ namespace SuggestionApi.Web.Startup
                 try
                 {
                     Console.WriteLine($" ************ dotnet.exe process id: {Process.GetCurrentProcess().Id} ************");
+
+                    
                     seed.SeedPrefixTree();
                     host.Run();
                 }

@@ -1,8 +1,8 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace SuggestionApi.Domain.Models
+namespace SuggestionApi.Domain.Models.Locations
 {
-    public class GeoNameInput
+    public class LocationInput
     {
         [Name("name")]
         public string Name { get; set; }

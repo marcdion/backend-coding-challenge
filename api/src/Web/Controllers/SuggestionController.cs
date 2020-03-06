@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
-using DefaultNamespace;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SuggestionApi.Domain.Models;
+using SuggestionApi.Domain.Models.DataStructure;
+using SuggestionApi.Domain.Models.Suggestions;
 
 namespace SuggestionApi.Web.Controllers
 {
@@ -21,27 +23,10 @@ namespace SuggestionApi.Web.Controllers
         }
 
         [HttpGet]        
-        public List<SuggestionDto> GetSuggestions(string q)
+        public List<Suggestion> GetSuggestions(string q)
         {
             var results = _trie.Trie.GetSuggestionsForPrefix(q);
-
-            return new List<SuggestionDto>
-            {
-                new SuggestionDto
-                {
-                    Name = "London, ON, Canada",
-                    Latitude = 42.98339,
-                    Longitude = -81.23304,
-                    Score = 0.9
-                },
-                new SuggestionDto
-                {
-                    Name = "Victoria, BC, Canada",
-                    Latitude = 42.98339,
-                    Longitude = -81.23304,
-                    Score = 0.9
-                }
-            };
+            return results.ToList();
         }
     }
 }

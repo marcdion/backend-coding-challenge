@@ -1,7 +1,8 @@
-using System;
 using System.Collections.Generic;
+using SuggestionApi.Domain.Models.Locations;
+using SuggestionApi.Domain.Models.Suggestions;
 
-namespace SuggestionApi.Domain.Models
+namespace SuggestionApi.Domain.Models.DataStructure
 {
     //See ADR-003 for why I chose a Trie data structure
     public class Trie
@@ -29,7 +30,7 @@ namespace SuggestionApi.Domain.Models
             return result;
         }
 
-        public void Insert(GeoName val)
+        public void Insert(Location val, double? avg)
         {
             var commonPrefix = Prefix(val.Name);
             var current = commonPrefix;
@@ -40,11 +41,13 @@ namespace SuggestionApi.Domain.Models
                 current.Children.Add(newNode);
                 current = newNode;
             }
+            
+            current.Locations.Add(new LocationLean(current, val.Latitude, val.Longitude, val.Country, val.AdministrativeRegion, CalculateBaseScore(val.Population, avg)));;
         }
 
-        public IEnumerable<string> GetSuggestionsForPrefix(string s)
+        public IEnumerable<Suggestion> GetSuggestionsForPrefix(string s)
         {
-            var results = new List<string>();
+            var results = new List<Suggestion>();
             var wordNodes = new List<Node>();
             var commonPrefix = Prefix(s);
 
@@ -52,6 +55,7 @@ namespace SuggestionApi.Domain.Models
 
             foreach (var wordNode in wordNodes)
             {
+                var locations = wordNode.Locations;
                 var current = wordNode;
                 var chars = new char[wordNode.Depth];
                 for (var i = wordNode.Depth - 1; i >= 0; i--)
@@ -60,7 +64,20 @@ namespace SuggestionApi.Domain.Models
                     current = current.Parent;
                 }
 
-                results.Add(new string(chars));
+                foreach (var locationNode in locations)
+                {
+                    results.Add(new Suggestion
+                    {
+                        Name = $"{new string(chars)}, {locationNode.AdministrativeRegion}, {locationNode.Country}",
+                        Latitude = locationNode.Latitude,
+                        Longitude = locationNode.Longitude,
+                        BaseScore = locationNode.BaseScore,
+                        DepthDifference = wordNode.Depth - commonPrefix.Depth,
+                        Popularity = wordNode.Popularity
+                    });
+                }
+
+                wordNode.Popularity++;
             }
             
             return results;
@@ -68,11 +85,16 @@ namespace SuggestionApi.Domain.Models
 
         private void FindAllChildWords(Node n, ICollection<Node> wordNodes)
         {
-            if(n.IsLeaf)
+            if(n.IsLeaf())
                 wordNodes.Add(n);
 
             foreach (var node in n.Children)
                 FindAllChildWords(node, wordNodes);
+        }
+
+        private double CalculateBaseScore(double? population, double? ceiling)
+        {
+            return !population.HasValue || !ceiling.HasValue ? 0 : population.Value / ceiling.Value;
         }
     }
 }

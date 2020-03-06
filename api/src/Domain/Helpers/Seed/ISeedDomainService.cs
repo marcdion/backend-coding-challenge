@@ -1,4 +1,4 @@
-namespace SuggestionApi.Domain.Helpers
+namespace SuggestionApi.Domain.Helpers.Seed
 {
     public interface ISeedDomainService
     {
