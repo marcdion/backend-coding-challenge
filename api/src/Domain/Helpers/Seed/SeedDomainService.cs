@@ -41,5 +41,12 @@ namespace SuggestionApi.Domain.Helpers.Seed
                     _trie.Trie.Insert(_mapper.Map<Location>(geoName), ceilingValue);
             }
         }
+
+        public void ResetPrefixTree()
+        {
+            //Reset trie
+            _trie.Trie.Reset();
+            SeedPrefixTree();
+        }
     }
 }

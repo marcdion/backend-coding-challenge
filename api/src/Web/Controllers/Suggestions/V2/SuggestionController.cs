@@ -43,7 +43,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
                 return new List<SuggestionDto>();
             
             if(_trie.Trie.IsEmpty())
-                _seedDomainService.SeedPrefixTree();
+                _seedDomainService.ResetPrefixTree();
             
             if (n.HasValue && n >= 0)
                 defaultResultSize = n.Value;
