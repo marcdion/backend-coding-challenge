@@ -7,12 +7,12 @@ using SuggestionApi.Domain.Helpers.Geo;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
-using SuggestionApi.Domain.Models.Suggestions;
 
-namespace SuggestionApi.Web.Controllers
+namespace SuggestionApi.Web.Controllers.Suggestions.V2
 {
-    [Route("suggestions/")]
     [ApiController]
+    [ApiVersion( "2.0" )]
+    [Route("suggestions/")]
     public class SuggestionController : ControllerBase
     {
         private readonly ILogger<SuggestionController> _logger;
