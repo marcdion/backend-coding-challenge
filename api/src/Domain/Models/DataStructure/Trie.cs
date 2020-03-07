@@ -14,6 +14,11 @@ namespace SuggestionApi.Domain.Models.DataStructure
             _root = new Node('^', 0, null);
         }
 
+        public bool IsEmpty()
+        {
+            return _root.Children.Count == 0;
+        }
+
         public Node Prefix(string s)
         {
             var currentNode = _root;

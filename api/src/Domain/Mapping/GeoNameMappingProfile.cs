@@ -1,5 +1,4 @@
 using AutoMapper;
-using SuggestionApi.Domain.Models;
 using SuggestionApi.Domain.Models.Locations;
 
 namespace SuggestionApi.Domain.Mapping

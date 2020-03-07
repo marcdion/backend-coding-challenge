@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuggestionApi.Domain.Helpers;
+using SuggestionApi.Domain.Helpers.Geo;
+using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -37,6 +39,8 @@ namespace SuggestionApi.Web.Startup
             
             //Adding services
             services.AddSingleton<ISeedDomainService, SeedDomainService>();
+            services.AddSingleton<IScoringDomainService, ScoringDomainService>();
+            services.AddSingleton<IGeoDomainService, GeoDomainService>();
             services.AddSingleton<SharedTrie>();
             services.AddSingleton<SharedScoringWeight>();
         }
