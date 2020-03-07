@@ -6,6 +6,7 @@ import Utils from './utils'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/sass/_styles.scss';
+import 'bootstrap'
 
 require('dotenv').config()
 Axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;

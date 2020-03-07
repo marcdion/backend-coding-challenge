@@ -38,26 +38,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V1
         [HttpGet]        
         public List<SuggestionDto> GetSuggestions(string q, double? latitude, double? longitude, int? n)
         {
-            var defaultResultSize = 10;
-            if(string.IsNullOrEmpty(q))
-                return new List<SuggestionDto>();
-            
-            if(_trie.Trie.IsEmpty())
-                _seedDomainService.SeedPrefixTree();
-            
-            if (n.HasValue && n >= 0)
-                defaultResultSize = n.Value;
-            
-            //Fetch suggestions
-            var results = _trie.Trie.GetSuggestionsForPrefix(q).ToList();
-
-            //Add score to values
-            List<SuggestionDto> weightedResults;
-            if (_geoDomainService.AreCoordinatesValid(latitude, longitude))
-                weightedResults = _scoringDomainService.WeightedSuggestionsWithCoordinates(results, latitude.Value, longitude.Value, defaultResultSize);
-            else
-                weightedResults = _scoringDomainService.WeightedSuggestions(results, defaultResultSize);
-
+            //To implement
             return new List<SuggestionDto>();
         }
     }
