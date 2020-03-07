@@ -17,12 +17,13 @@ namespace SuggestionApi.Domain.Helpers.Scoring
 
         public List<SuggestionDto> WeightedSuggestions(List<Suggestion> suggestions, int maxValues)
         {
-            return suggestions.Take(maxValues).Select(q => _mapper.Map<SuggestionDto>(q)).OrderByDescending(q => q.Score).ToList();
+            //TODO - change BaseScore to weighted score once it is calculated
+            return suggestions.OrderByDescending(q => q.BaseScore).Take(maxValues).Select(q => _mapper.Map<SuggestionDto>(q)).ToList();
         }
 
         public List<SuggestionDto> WeightedSuggestionsWithCoordinates(List<Suggestion> suggestions, double latitude, double longitude, int maxValues)
         {
-            return suggestions.Take(maxValues).Select(q => _mapper.Map<SuggestionDto>(q)).OrderByDescending(q => q.Score).ToList();
+            return suggestions.OrderByDescending(q => q.BaseScore).Take(maxValues).Select(q => _mapper.Map<SuggestionDto>(q)).ToList();
         }
     }
 }
