@@ -42,7 +42,7 @@
 
     <div class="page-container row">
       <div class="search-container col-lg-4">
-        <search-box @queryChanged="queryChanged" :query="query"></search-box>
+        <search-box @queryChanged="queryChanged" :query="query" :responseTime="responseTime"></search-box>
         <div class="additional-parameters-container">
           <h4>Additionnal parameters:</h4>
           <div class="row additional-parameters">
@@ -114,7 +114,8 @@ export default {
       query: "",
       latitude: "",
       longitude: "",
-      maxResults: "10"
+      maxResults: "10",
+      responseTime: 0
     };
   },
   watch: {
@@ -136,6 +137,7 @@ export default {
   methods: {
     queryChanged(query) {
       this.results = [];
+      this.responseTime = 0;
       if (query.length >= queryMinimumLength) {
         this.query = query;
         this.fetchData();
@@ -143,6 +145,9 @@ export default {
     },
     fetchData() {
       let self = this;
+
+      //Tracking performance
+      var start = Date.now();
       self.$axios
         .get("/suggestions", {
           params: {
@@ -154,6 +159,7 @@ export default {
           headers: { "api-version": self.apiVersion }
         })
         .then(response => {
+          self.responseTime = Date.now() - start;
           self.results = response.data;
         })
         .catch(errors => {

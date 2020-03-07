@@ -4,6 +4,7 @@
     <div class="search-bar">
       <input type="search" id="suggestion-search" name="suggestion-search" v-model="input" />
     </div>
+    <p v-show="responseTime != 0" class="response-time">{{`Response time: ${responseTime} ms`}}</p>
   </div>
 </template>
 
@@ -16,7 +17,13 @@ export default {
       default() {
         return "";
       }
-    }
+    },
+    responseTime: {
+      type: Number,
+      default() {
+        return 0;
+      }
+    },
   },
   watch: {
     query: function(val) {
