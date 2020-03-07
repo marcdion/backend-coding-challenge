@@ -13,6 +13,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
     [ApiController]
     [ApiVersion( "2.0" )]
     [Route("suggestions/")]
+    [ApiExplorerSettings(GroupName = "2.0")]
     public class SuggestionController : ControllerBase
     {
         private readonly ILogger<SuggestionController> _logger;
@@ -49,7 +50,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
                 defaultResultSize = n.Value;
             
             //Fetch suggestions
-            var results = _trie.Trie.GetSuggestionsForPrefix(q).ToList();
+            var results = _trie.Trie.GetSuggestionsForPrefix(SanitizeInput(q)).ToList();
 
             //Add score to values
             List<SuggestionDto> weightedResults;
@@ -59,6 +60,12 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
                 weightedResults = _scoringDomainService.WeightedSuggestions(results, defaultResultSize);
 
             return weightedResults;
+        }
+
+        private string SanitizeInput(string s)
+        {
+            //We are not striping diacritic, see ADR-007
+            return s.Trim().ToLower();
         }
     }
 }
