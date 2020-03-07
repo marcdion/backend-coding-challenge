@@ -130,7 +130,7 @@ export default {
   },
   computed: {
     apiDocumentationEndpoint(){
-      return `${process.env.VUE_APP_API_ENDPOINT}/swagger/index.html`
+      return `${process.env.VUE_APP_API_ENDPOINT}/swagger/index.html?urls.primaryName=Suggestion API - Version ${this.apiVersion}`
     }
   },
   methods: {
