@@ -1,20 +1,46 @@
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using CsvHelper;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SuggestionApi.Web.Startup;
+using SuggestionApi.Domain.Helpers;
+using SuggestionApi.Domain.Helpers.Seed;
+using SuggestionApi.Domain.Models;
 
-namespace SuggestionApi
+namespace SuggestionApi.Web.Startup
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            
+            using (var scope = host.Services.CreateScope())
+            {
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                var seed = scope.ServiceProvider.GetRequiredService<ISeedDomainService>();
+
+                try
+                {
+                    Console.WriteLine($" ************ dotnet.exe process id: {Process.GetCurrentProcess().Id} ************");
+                    seed.SeedPrefixTree();
+                    host.Run();
+                }
+                catch (Exception exception)
+                {
+                    logger.LogError(
+                        new EventId(0, "Initialization error"),
+                        exception,
+                        "an error occured while initializing the app");
+
+                    throw;
+                }
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

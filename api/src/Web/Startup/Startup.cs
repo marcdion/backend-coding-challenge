@@ -1,8 +1,16 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SuggestionApi.Domain.Helpers;
+using SuggestionApi.Domain.Helpers.Geo;
+using SuggestionApi.Domain.Helpers.Scoring;
+using SuggestionApi.Domain.Helpers.Seed;
+using SuggestionApi.Domain.Models;
+using SuggestionApi.Domain.Models.DataStructure;
+using SuggestionApi.Domain.Models.ScoringWeights;
 
 namespace SuggestionApi.Web.Startup
 {
@@ -19,6 +27,7 @@ namespace SuggestionApi.Web.Startup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddCors(options =>
             {
@@ -27,6 +36,13 @@ namespace SuggestionApi.Web.Startup
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
+            
+            //Adding services
+            services.AddSingleton<ISeedDomainService, SeedDomainService>();
+            services.AddSingleton<IScoringDomainService, ScoringDomainService>();
+            services.AddSingleton<IGeoDomainService, GeoDomainService>();
+            services.AddSingleton<SharedTrie>();
+            services.AddSingleton<SharedScoringWeight>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
