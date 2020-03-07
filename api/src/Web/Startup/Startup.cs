@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SuggestionApi.Domain.Helpers;
 using SuggestionApi.Domain.Helpers.Geo;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
-using SuggestionApi.Domain.Models;
 using SuggestionApi.Domain.Models.DataStructure;
 using SuggestionApi.Domain.Models.ScoringWeights;
 
@@ -58,18 +56,12 @@ namespace SuggestionApi.Web.Startup
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-            
             app.UseCors(CORS_POLICY);
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

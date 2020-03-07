@@ -1,53 +1,100 @@
-
-.page-container, .landing-container{
-    height: calc(100vh - 200);
+.page-container,
+.landing-container {
+	height: calc(100vh - 200);
 }
 
-.landing-container{
-    
-    .page-title{
-        padding-left: 10px;
-    }
+.landing-container {
 
-    .page-container{
-        display: flex;
-        justify-content: space-around;
-        margin: 0;
+	.page-title {
+		padding-left: 10px;
+	}
 
-        padding-top: $top-padding;
+	.page-container {
+		display: flex;
+		justify-content: space-around;
+		margin: 0;
 
-        .search-container, .results-container{
-            max-width: 49%;
-        }
+		padding-top: $top-padding;
 
-        .search-container{
-            display: flex;
-            justify-content: center;
+		.search-container,
+		.results-container {
+			max-width: 49%;
+		}
 
-            .search-box-container{
-                h3{
-                    font-size: 36px;
-                    font-weight: 600;
-                    padding-bottom: 20px;
-                }
-    
-                #suggestion-search{
-                    width: 100%;
-                    font-size: 28px;
-                    border: 1px solid gray;
-                    border-radius: 25px;
-                    padding: 12px;
-                    background: whitesmoke;
-                    font-family: 'Source Sans Pro', sans-serif;
-                    font-weight: 600;
-                }
-    
-            }
-        }
+		.search-container {
+			display: flex;
+			flex-direction: column;
 
-        .results-container{
-           margin-top: 63px;
-        }
-       
-    }
-}   
+			.search-box-container {
+				h3 {
+					font-size: 36px;
+					font-weight: 600;
+					padding-bottom: 20px;
+				}
+
+				#suggestion-search {
+					width: 100%;
+					font-size: 28px;
+					border: 1px solid gray;
+					border-radius: 25px;
+					padding: 12px;
+					background: whitesmoke;
+					font-family: 'Source Sans Pro', sans-serif;
+					font-weight: 600;
+				}
+
+			}
+
+			.additional-parameters-container {
+				margin-top: 65px;
+
+				h4 {
+					font-weight: 600;
+				}
+
+				.additional-parameters {
+					margin-top: 10px;
+
+					p {
+						font-weight: 600;
+						width: 75%;
+						padding-left: 10px;
+					}
+
+					input {
+						width: 75%;
+						border: 1px solid gray;
+						border-radius: 25px;
+						padding: 5px 5px 5px 10px;
+						background: whitesmoke;
+						font-family: 'Source Sans Pro', sans-serif;
+						font-weight: 600;
+					}
+				}
+			}
+
+			.predifined-queries-container{
+				margin-top: 25px;
+
+				h4 {
+					font-weight: 600;
+				}
+
+				.predifined-queries {
+					margin-top: 10px;
+					flex-direction: column;
+
+					button{
+						margin-top: 10px;
+						font-weight: 600;
+					}
+				}
+			}
+		}
+
+		.results-container {
+			margin-top: 63px;
+		}
+
+	}
+}
