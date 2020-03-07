@@ -13,6 +13,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V1
     [ApiController]
     [ApiVersion( "1.0", Deprecated = true )]
     [Route("suggestions/")]
+    [ApiExplorerSettings(GroupName = "1.0")]
     public class SuggestionController : ControllerBase
     {
         private readonly ILogger<SuggestionController> _logger;

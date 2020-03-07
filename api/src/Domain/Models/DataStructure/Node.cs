@@ -27,7 +27,7 @@ namespace SuggestionApi.Domain.Models.DataStructure
         public Node FindChildNode(char c)
         {
             foreach (var child in Children)
-                if (char.ToUpperInvariant(child.Value) == char.ToUpperInvariant(c))
+                if (char.ToLowerInvariant(child.Value) == char.ToLowerInvariant(c))
                     return child;
 
             return null;

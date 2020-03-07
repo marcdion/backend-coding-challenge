@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using SuggestionApi.Domain.Helpers.Geo;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
@@ -50,6 +51,33 @@ namespace SuggestionApi.Web.Startup
             services.AddSingleton<IGeoDomainService, GeoDomainService>();
             services.AddSingleton<SharedTrie>();
             services.AddSingleton<SharedScoringWeight>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("1.0", new OpenApiInfo
+                {
+                    Version = "Version 1.0",
+                    Title = "Suggestions API documentation",
+                    Description = "This API provides auto complete suggestions for location search",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Marc-Antoine Dion",
+                        Email = "marc-antoine.dion@gmddeveloppement.com"
+                    }
+                });
+                
+                c.SwaggerDoc("2.0", new OpenApiInfo
+                {
+                    Version = "Version 2.0",
+                    Title = "Suggestions API documentation",
+                    Description = "This API provides auto complete suggestions for location search",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Marc-Antoine Dion",
+                        Email = "marc-antoine.dion@gmddeveloppement.com"
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +93,13 @@ namespace SuggestionApi.Web.Startup
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/1.0/swagger.json", "Suggestion API - Version 1.0");
+                c.SwaggerEndpoint("/swagger/2.0/swagger.json", "Suggestion API - Version 2.0");
             });
         }
     }

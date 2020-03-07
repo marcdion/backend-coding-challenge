@@ -4,7 +4,7 @@ namespace SuggestionApi.Domain.Models.Locations
 {
     public class LocationInput
     {
-        [Name("name")]
+        [Name("ascii")]
         public string Name { get; set; }
         
         [Name("lat")]

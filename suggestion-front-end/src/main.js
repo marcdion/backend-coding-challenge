@@ -6,7 +6,6 @@ import Axios from 'axios'
 import Utils from './utils'
 import Toasted from 'vue-toasted';
 
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/sass/_styles.scss';
 import 'bootstrap'

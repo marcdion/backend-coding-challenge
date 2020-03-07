@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using AutoMapper;
 using CsvHelper;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -26,9 +27,9 @@ namespace SuggestionApi.Domain.Helpers.Seed
 
         public void SeedPrefixTree()
         {
-            using (var reader = new StreamReader(@$"..\..\api\src\Domain\DataSource\{geoFileName}"))
+            using (var reader = new StreamReader(@$"..\..\api\src\Domain\DataSource\{geoFileName}", Encoding.Default, true))
             {
-                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+                using var csv = new CsvReader(reader, CultureInfo.CurrentCulture);
                 csv.Configuration.Delimiter = "\t";
                 csv.Configuration.HasHeaderRecord = true;
                 var geoNames = csv.GetRecords<LocationInput>();

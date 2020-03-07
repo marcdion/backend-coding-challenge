@@ -15,6 +15,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" :href="apiDocumentationEndpoint" target="_blank">API documentation</a>
+          </li>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -125,6 +128,11 @@ export default {
       this.fetchData();
     }
   },
+  computed: {
+    apiDocumentationEndpoint(){
+      return `${process.env.VUE_APP_API_ENDPOINT}/swagger/index.html`
+    }
+  },
   methods: {
     queryChanged(query) {
       this.results = [];
@@ -159,10 +167,10 @@ export default {
           headers: { "api-version": self.apiVersion }
         })
         .then(() => {
-          self.$toasted.success("Data was reset!", { 
-            theme: "bubble", 
-            position: "bottom-right", 
-            duration : 3000
+          self.$toasted.success("Data was reset!", {
+            theme: "bubble",
+            position: "bottom-right",
+            duration: 3000
           });
         })
         .catch(errors => {
@@ -174,11 +182,11 @@ export default {
       this.results = [];
       this.query = "";
 
-      this.$toasted.success(`API version was changed to ${this.apiVersion} !`, { 
-            theme: "bubble", 
-            position: "bottom-right", 
-            duration : 3000
-          });
+      this.$toasted.success(`API version was changed to ${this.apiVersion} !`, {
+        theme: "bubble",
+        position: "bottom-right",
+        duration: 3000
+      });
     },
     predifinedQuery1() {
       this.query = "londo";
