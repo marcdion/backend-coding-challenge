@@ -1,6 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +31,13 @@ namespace SuggestionApi.Web.Startup
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
+            services.AddApiVersioning(o =>
+            {
+                o.ApiVersionReader = new HeaderApiVersionReader("api-version");
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(2, 0);
+            });            
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(CORS_POLICY, builder => builder
