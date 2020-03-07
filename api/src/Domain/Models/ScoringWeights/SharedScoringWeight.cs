@@ -6,18 +6,18 @@ namespace SuggestionApi.Domain.Models.ScoringWeights
         //Sum of all relevant weights should equal 10
         
         //Always present
-        private const int BASE_SCORE_WEIGHT = 1;
-        private const int POPULARITY_SCORE_WEIGHT = 3;
+        private const double POPULARITY_SCORE_WEIGHT = 0.10;
+        private const double POPULATION_SCORE_WEIGHT = 0.20;
         
         //Scenario 1
-        private const int DEPTH_DIFFERENCE_WITHOUT_LOCATION_SCORE_WEIGHT = 6;
+        private const double DEPTH_DIFFERENCE_WITHOUT_LOCATION_SCORE_WEIGHT = 0.70;
         
         //Scenario 2
-        private const int DEPTH_DIFFERENCE_WITH_LOCATION_SCORE_WEIGHT = 4;
-        private const int LOCATION_DISTANCE_SCORE_WEIGHT = 2;
+        private const double DEPTH_DIFFERENCE_WITH_LOCATION_SCORE_WEIGHT = 0.50;
+        private const double LOCATION_DISTANCE_SCORE_WEIGHT = 0.20;
         
         private readonly ScoringWeight _scoringWeight
-            = new ScoringWeight(BASE_SCORE_WEIGHT, POPULARITY_SCORE_WEIGHT,
+            = new ScoringWeight(POPULATION_SCORE_WEIGHT, POPULARITY_SCORE_WEIGHT,
                 DEPTH_DIFFERENCE_WITH_LOCATION_SCORE_WEIGHT, DEPTH_DIFFERENCE_WITHOUT_LOCATION_SCORE_WEIGHT,
                 LOCATION_DISTANCE_SCORE_WEIGHT);
 
