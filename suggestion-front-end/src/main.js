@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import App from './Landing.vue'
+import router from './router'
 
 import Axios from 'axios'
 import Utils from './utils'
+import Toasted from 'vue-toasted';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/sass/_styles.scss';
@@ -18,6 +21,9 @@ Vue.config.productionTip = false
 Vue.prototype.$u = Utils;
 Vue.prototype.$axios = Axios;
 
+Vue.use(Toasted)
+
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')

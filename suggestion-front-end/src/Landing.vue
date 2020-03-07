@@ -30,6 +30,9 @@
               <a class="dropdown-item" href="#" v-on:click="setApiVersion('2.0')">2.0</a>
             </div>
           </li>
+          <li class="nav-item">
+            <button type="button" class="btn btn-dark" v-on:click="resetData()">Reset data</button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -58,21 +61,27 @@
         <div class="predifined-queries-container">
           <h4>Predefined queries:</h4>
           <div class="row predifined-queries">
-              <div class="col">
-                  <button type="button" class="btn btn-dark" v-on:click="predifinedQuery1()">
-                    /suggestions?q=londo
-                  </button>
-              </div>
-              <div class="col">
-                  <button type="button" class="btn btn-dark" v-on:click="predifinedQuery2()">
-                        /suggestions?q=Londo&latitude=43.70011&longitude=-79.4163
-                  </button>
-              </div>
-              <div class="col">
-                  <button type="button" class="btn btn-dark" v-on:click="predifinedQuery3()">
-                        /suggestions?q=New&latitude=40.71427&longitude=-74.00597&n=3
-                  </button>
-              </div>
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-dark"
+                v-on:click="predifinedQuery1()"
+              >/suggestions?q=londo</button>
+            </div>
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-dark"
+                v-on:click="predifinedQuery2()"
+              >/suggestions?q=Londo&latitude=43.70011&longitude=-79.4163</button>
+            </div>
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-dark"
+                v-on:click="predifinedQuery3()"
+              >/suggestions?q=New&latitude=40.71427&longitude=-74.00597&n=3</button>
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +137,12 @@ export default {
       let self = this;
       self.$axios
         .get("/suggestions", {
-          params: { q: self.query, latitude: self.latitude, longitude: self.longitude, n: self.maxResults },
+          params: {
+            q: self.query,
+            latitude: self.latitude,
+            longitude: self.longitude,
+            n: self.maxResults
+          },
           headers: { "api-version": self.apiVersion }
         })
         .then(response => {
@@ -138,26 +152,49 @@ export default {
           console.log(errors);
         });
     },
+    resetData() {
+      let self = this;
+      self.$axios
+        .post("/seed", {
+          headers: { "api-version": self.apiVersion }
+        })
+        .then(() => {
+          self.$toasted.success("Data was reset!", { 
+            theme: "bubble", 
+            position: "bottom-right", 
+            duration : 3000
+          });
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
+    },
     setApiVersion(val) {
       this.apiVersion = val;
       this.results = [];
       this.query = "";
+
+      this.$toasted.success(`API version was changed to ${this.apiVersion} !`, { 
+            theme: "bubble", 
+            position: "bottom-right", 
+            duration : 3000
+          });
     },
-    predifinedQuery1(){
-        this.query = "londo";
-        this.maxResults = "10";
+    predifinedQuery1() {
+      this.query = "londo";
+      this.maxResults = "10";
     },
-    predifinedQuery2(){
-        this.query = "Londo";
-        this.latitude = "42.98339";
-        this.longitude = "-81.23304";
-        this.maxResults = "10";
+    predifinedQuery2() {
+      this.query = "Londo";
+      this.latitude = "42.98339";
+      this.longitude = "-81.23304";
+      this.maxResults = "10";
     },
-    predifinedQuery3(){
-        this.query = "New";
-        this.latitude = "40.71427";
-        this.longitude = "-74.00597";
-        this.maxResults = "3";
+    predifinedQuery3() {
+      this.query = "New";
+      this.latitude = "40.71427";
+      this.longitude = "-74.00597";
+      this.maxResults = "3";
     }
   }
 };

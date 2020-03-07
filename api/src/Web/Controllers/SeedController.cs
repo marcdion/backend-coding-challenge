@@ -14,11 +14,11 @@ namespace SuggestionApi.Web.Controllers
             _seedDomainService = seedDomainService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Seed()
         {
-            _seedDomainService.SeedPrefixTree();
+            _seedDomainService.ResetPrefixTree();
             return Ok();
         }
     }
-}
+}    

@@ -7,7 +7,7 @@ namespace SuggestionApi.Domain.Models.DataStructure
     //See ADR-003 for why I chose a Trie data structure
     public class Trie
     {
-        private readonly Node _root;
+        private Node _root;
 
         public Trie()
         {
@@ -17,6 +17,11 @@ namespace SuggestionApi.Domain.Models.DataStructure
         public bool IsEmpty()
         {
             return _root.Children.Count == 0;
+        }
+
+        public void Reset()
+        {
+            _root = new Node('^', 0, null);
         }
 
         public Node Prefix(string s)
