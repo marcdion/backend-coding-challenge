@@ -3,12 +3,12 @@ using SuggestionApi.Domain.Models.ScoringWeights;
 
 namespace SuggestionApi.Domain.Helpers.Scoring.Parameters.PopulationScore
 {
-    public class LogarithmicPopulationScore : ILogarithmicPopulationScore
+    public class LogarithmicPopulationScoreFactoryFactory : ILogarithmicPopulationScoreFactory
     {
         private readonly SharedScoringWeight _scoringWeight;
         private const double MAX_POPULATION_SIZE = 8175133;
 
-        public LogarithmicPopulationScore(SharedScoringWeight scoringWeight)
+        public LogarithmicPopulationScoreFactoryFactory(SharedScoringWeight scoringWeight)
         {
             _scoringWeight = scoringWeight;
         }

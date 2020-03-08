@@ -3,11 +3,11 @@ using SuggestionApi.Domain.Models.ScoringWeights;
 
 namespace SuggestionApi.Domain.Helpers.Scoring.Parameters.PopularityScore
 {
-    public class LogarithmicPopularityScore : ILogarithmicPopularityScore
+    public class LogarithmicPopularityScoreFactory : ILogarithmicPopularityScoreFactory
     {
         private readonly SharedScoringWeight _scoringWeight;
 
-        public LogarithmicPopularityScore(SharedScoringWeight scoringWeight)
+        public LogarithmicPopularityScoreFactory(SharedScoringWeight scoringWeight)
         {
             _scoringWeight = scoringWeight;
         }

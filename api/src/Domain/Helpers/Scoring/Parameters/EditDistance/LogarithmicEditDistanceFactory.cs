@@ -4,18 +4,18 @@ using SuggestionApi.Domain.Models.Suggestions;
 
 namespace SuggestionApi.Domain.Helpers.Scoring.Parameters.EditDistance
 {
-    public class LogarithmicEditDistance : ILogarithmicEditDistance
+    public class LogarithmicEditDistanceFactory : ILogarithmicEditDistanceFactory
     {
         private readonly SharedScoringWeight _scoringWeight;
 
-        public LogarithmicEditDistance(SharedScoringWeight scoringWeight)
+        public LogarithmicEditDistanceFactory(SharedScoringWeight scoringWeight)
         {
             _scoringWeight = scoringWeight;
         }
 
-        public double ComputeLogarithmicEditDistance(Suggestion suggestion)
+        public double ComputeLogarithmicEditDistance(Suggestion suggestion, bool areCoordinatesValid)
         {
-            var weight = _scoringWeight.ScoringWeight.DepthDifferenceWithoutLocationScoreWeight;
+            var weight = areCoordinatesValid ? _scoringWeight.ScoringWeight.DepthDifferenceWithLocationScoreWeight : _scoringWeight.ScoringWeight.DepthDifferenceWithoutLocationScoreWeight;
             if (suggestion.DepthDifference == 0 || suggestion.DepthDifference == 1)
                 return 1 * weight;
             

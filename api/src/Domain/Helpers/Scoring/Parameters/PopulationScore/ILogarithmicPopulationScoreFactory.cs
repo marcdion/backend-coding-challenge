@@ -1,6 +1,6 @@
 namespace SuggestionApi.Domain.Helpers.Scoring.Parameters.PopulationScore
 {
-    public interface ILogarithmicPopulationScore
+    public interface ILogarithmicPopulationScoreFactory
     {
         double ComputeLogarithmicPopulationScore(double? population);
     }

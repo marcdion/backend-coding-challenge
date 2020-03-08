@@ -6,6 +6,8 @@ using SuggestionApi.Appplication.Suggestions.Dto;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.EditDistance;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.PopularityScore;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.PopulationScore;
+using SuggestionApi.Domain.Helpers.Scoring.Parameters.TravelDistance;
+using SuggestionApi.Domain.Models.Locations;
 using SuggestionApi.Domain.Models.ScoringWeights;
 using SuggestionApi.Domain.Models.Suggestions;
 
@@ -15,21 +17,24 @@ namespace SuggestionApi.Domain.Helpers.Scoring
     {
         private readonly IMapper _mapper;
         private readonly SharedScoringWeight _scoringWeight;
-        private readonly ILogarithmicEditDistance _editDistance;
-        private readonly ILogarithmicPopularityScore _popularityScore;
-        private readonly ILogarithmicPopulationScore _populationScore;
+        private readonly ILogarithmicEditDistanceFactory _editDistanceFactory;
+        private readonly ILogarithmicPopularityScoreFactory _popularityScoreFactory;
+        private readonly ILogarithmicPopulationScoreFactory _populationScoreFactory;
+        private readonly ITravelDistanceScoreFactory _travelDistanceScoreFactory;
 
         public ScoringDomainService(IMapper mapper, 
             SharedScoringWeight scoringWeight, 
-            ILogarithmicEditDistance editDistance, 
-            ILogarithmicPopularityScore popularityScore, 
-            ILogarithmicPopulationScore populationScore)
+            ILogarithmicEditDistanceFactory editDistanceFactory, 
+            ILogarithmicPopularityScoreFactory popularityScoreFactory, 
+            ILogarithmicPopulationScoreFactory populationScoreFactory, 
+            ITravelDistanceScoreFactory travelDistanceScoreFactory)
         {
             _mapper = mapper;
             _scoringWeight = scoringWeight;
-            _editDistance = editDistance;
-            _popularityScore = popularityScore;
-            _populationScore = populationScore;
+            _editDistanceFactory = editDistanceFactory;
+            _popularityScoreFactory = popularityScoreFactory;
+            _populationScoreFactory = populationScoreFactory;
+            _travelDistanceScoreFactory = travelDistanceScoreFactory;
         }
 
         public List<SuggestionDto> WeightedSuggestions(List<Suggestion> suggestions, int maxValues)
@@ -40,19 +45,37 @@ namespace SuggestionApi.Domain.Helpers.Scoring
             foreach (var suggestion in suggestions)
             {
                 suggestion.WeightedScore =
-                    _popularityScore.ComputeLogarithmicPopularityScore(maxPopularity, suggestion.Popularity) +
-                    _populationScore.ComputeLogarithmicPopulationScore(suggestion.Population) +
-                    _editDistance.ComputeLogarithmicEditDistance(suggestion);
-
+                    _popularityScoreFactory.ComputeLogarithmicPopularityScore(maxPopularity, suggestion.Popularity) +
+                    _populationScoreFactory.ComputeLogarithmicPopulationScore(suggestion.Population) +
+                    _editDistanceFactory.ComputeLogarithmicEditDistance(suggestion, false);
+               
                 weightedSuggestions.Add(_mapper.Map<SuggestionDto>(suggestion));
             }
             
             return weightedSuggestions.OrderByDescending(q => q.Score).Take(maxValues).ToList();
         }
 
-        public List<SuggestionDto> WeightedSuggestionsWithCoordinates(List<Suggestion> suggestions, double latitude, double longitude, int maxValues)
+        public List<SuggestionDto> WeightedSuggestionsWithCoordinates(List<Suggestion> suggestions, int maxValues, GeographicalLocation location)
         {
-            return suggestions.OrderByDescending(q => q.WeightedScore).Take(maxValues).Select(q => _mapper.Map<SuggestionDto>(q)).ToList();
+            var weightedSuggestions = new List<SuggestionDto>();
+            var maxPopularity = suggestions.Select(x => x.Popularity).DefaultIfEmpty(0).Max();
+
+            var distances = _travelDistanceScoreFactory.CalculateTravelDistances(location, suggestions);
+            var maximumDistance = distances.Values.Max();
+
+            for (var i = 0; i < suggestions.Count; i++)
+            {
+                var suggestion = suggestions.ElementAt(i);
+                suggestions.ElementAt(i).WeightedScore =
+                    _popularityScoreFactory.ComputeLogarithmicPopularityScore(maxPopularity, suggestion.Popularity) +
+                    _populationScoreFactory.ComputeLogarithmicPopulationScore(suggestion.Population) +
+                    _editDistanceFactory.ComputeLogarithmicEditDistance(suggestion, true) +
+                    _travelDistanceScoreFactory.CalculateDistanceScore(distances[i], maximumDistance);
+                
+                weightedSuggestions.Add(_mapper.Map<SuggestionDto>(suggestion));
+            }
+            
+            return weightedSuggestions.OrderByDescending(q => q.Score).Take(maxValues).ToList();
         }
     }
 }

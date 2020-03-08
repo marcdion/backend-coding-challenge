@@ -1,6 +1,6 @@
 namespace SuggestionApi.Domain.Helpers.Scoring.Parameters.PopularityScore
 {
-    public interface ILogarithmicPopularityScore
+    public interface ILogarithmicPopularityScoreFactory
     {
         double ComputeLogarithmicPopularityScore(double maxPopularity, double popularity);
     }
