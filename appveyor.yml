@@ -21,8 +21,8 @@ build_script:
 
 artifacts:
     - path: '\api\src\bin\Debug\netcoreapp3.1\publish'
-    name: SuggestionAPI
-    type: WebDeployPackage
+      name: SuggestionAPI
+      type: WebDeployPackagee
         
 clone_depth: 1
 
