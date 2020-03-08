@@ -33,4 +33,6 @@ test_script:
     #- cmd: cd /api/tests
     #- cmd: dotnet xunit
 
-deploy: off
+deploy:
+    - provider: Environment
+      name: suggestion-api-production
