@@ -5,7 +5,7 @@ namespace SuggestionApi.Domain.Models.ScoringWeights
     /// </summary>
     public class SharedScoringWeight
     {
-        //Sum of all relevant weights should equal 10
+        //Sum of all relevant weights should equal 1
         
         //Always present
         private const double POPULARITY_SCORE_WEIGHT = 0.10;

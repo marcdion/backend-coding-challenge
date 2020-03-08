@@ -13,15 +13,5 @@ namespace SuggestionApi.Domain.Extensions
         {
             return (Math.PI / 180) * val;
         }
-
-        public static bool IsLatitudeValid(this double val)
-        {
-            return !(val < -90) && !(val > 90);
-        }
-        
-        public static bool IsLongitudeValid(this double val)
-        {
-            return !(val < -180) && !(val > 180);
-        }
     }
 }
