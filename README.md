@@ -1,7 +1,7 @@
 # Coveo Backend Coding Challenge
 (inspired by https://github.com/busbud/coding-challenge-backend-c)
 
-## URL
+## Application URL
 [https://suggestion.marcantoinedion.com](https://suggestion.marcantoinedion.com)
 
 ### Table of contents
