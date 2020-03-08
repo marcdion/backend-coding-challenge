@@ -1,5 +1,8 @@
 namespace SuggestionApi.Domain.Models.Locations
 {
+    /// <summary>
+    /// Class used to easily transfer and validate location coordinates
+    /// </summary>
     public class GeographicalLocation
     {
         public GeographicalLocation(double? latitude, double? longitude)
@@ -23,11 +26,6 @@ namespace SuggestionApi.Domain.Models.Locations
                 return false;
 
             return true;
-        }
-
-        public bool IsEmpty()
-        {
-            return !Latitude.HasValue && !Longitude.HasValue;
         }
     }
 }

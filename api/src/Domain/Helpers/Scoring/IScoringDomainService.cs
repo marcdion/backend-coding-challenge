@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using SuggestionApi.Appplication.Suggestions.Dto;
+using SuggestionApi.Application.Suggestions.Dto;
 using SuggestionApi.Domain.Models.Locations;
 using SuggestionApi.Domain.Models.Suggestions;
 

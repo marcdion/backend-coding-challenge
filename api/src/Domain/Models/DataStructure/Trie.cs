@@ -5,7 +5,10 @@ using SuggestionApi.Domain.Models.Suggestions;
 
 namespace SuggestionApi.Domain.Models.DataStructure
 {
-    //See ADR-003 for why I chose a Trie data structure
+    /// <summary>
+    /// Main data structure for storing and searching locations
+    /// See ADR-003 for why I chose a Trie data structure.
+    /// </summary>
     public class Trie
     {
         private Node _root;

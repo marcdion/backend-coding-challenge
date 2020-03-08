@@ -2,6 +2,9 @@ using SuggestionApi.Domain.Models.DataStructure;
 
 namespace SuggestionApi.Domain.Models.Locations
 {
+    /// <summary>
+    /// Location information that is added and the end of a word in the prefix tree
+    /// </summary>
     public class LocationLean
     {
         public Node Parent { get; set; }

@@ -14,6 +14,10 @@ namespace SuggestionApi.Web.Controllers
             _seedDomainService = seedDomainService;
         }
 
+        /// <summary>
+        /// Generates the data in the prefix tree from the TSV file
+        /// </summary>
+        /// <response code="200">Data has been seeded successfully</response>
         [HttpPost]
         public IActionResult Seed()
         {

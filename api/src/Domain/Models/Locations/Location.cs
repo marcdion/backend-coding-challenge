@@ -1,5 +1,8 @@
 namespace SuggestionApi.Domain.Models.Locations
 {
+    /// <summary>
+    /// Location information that is used in the prefix tree insertion
+    /// </summary>
     public class Location
     {
         public string Name { get; set; }
