@@ -13,11 +13,11 @@ before_build:
     # Display .NET Core version
     - cmd: dotnet --version
     # Display minimal restore text
-    - cmd: dotnet restore ./api/src/src.csproj --verbosity m
+    - cmd: dotnet restore ./api/src/SuggestionAPI.csproj --verbosity m
 
 build_script:
     # output will be in ./src/bin/debug/netcoreapp3.1/publish
-    - cmd: dotnet publish ./api/src/src.csproj
+    - cmd: dotnet publish ./api/src/SuggestionAPI.csproj
 
 artifacts:
     - path: '\api\src\bin\Debug\netcoreapp3.1\publish'
