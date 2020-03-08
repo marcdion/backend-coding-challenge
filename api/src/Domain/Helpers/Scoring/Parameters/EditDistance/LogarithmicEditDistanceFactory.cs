@@ -16,9 +16,9 @@ namespace SuggestionApi.Domain.Helpers.Scoring.Parameters.EditDistance
         public double ComputeLogarithmicEditDistance(Suggestion suggestion, bool areCoordinatesValid)
         {
             var weight = areCoordinatesValid ? _scoringWeight.ScoringWeight.DepthDifferenceWithLocationScoreWeight : _scoringWeight.ScoringWeight.DepthDifferenceWithoutLocationScoreWeight;
-            if (suggestion.DepthDifference == 0 || suggestion.DepthDifference == 1)
+            if (suggestion.DepthDifference == 0)
                 return 1 * weight;
             
-            return (1 - Math.Log10(suggestion.DepthDifference) / Math.Log10(suggestion.Name.Length)) * weight;        }
+            return (1 - Math.Log10(suggestion.DepthDifference == 1 ? 1.5 : suggestion.DepthDifference) / Math.Log10(suggestion.Name.Length)) * weight;        }
     }
 }

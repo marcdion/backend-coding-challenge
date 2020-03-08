@@ -46,17 +46,20 @@
         <div class="additional-parameters-container">
           <h4>Additionnal parameters:</h4>
           <div class="row additional-parameters">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <p>Latitude :</p>
               <input type="text" id="latitude" name="latitude" v-model="latitude" />
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <p>Longitude :</p>
               <input type="text" id="longitude" name="longitude" v-model="longitude" />
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <p>Max results :</p>
               <input type="text" id="max-results" name="max-results" v-model="maxResults" />
+            </div>
+            <div class="col-lg-3 col-refresh">
+              <button type="button" class="btn btn-dark button-refresh" v-on:click="refreshData()">Refresh data</button>
             </div>
           </div>
         </div>
@@ -118,17 +121,6 @@ export default {
       responseTime: 0
     };
   },
-  watch: {
-    latitude: function() {
-      this.fetchData();
-    },
-    longitude: function() {
-      this.fetchData();
-    },
-    maxResults: function() {
-      this.fetchData();
-    }
-  },
   computed: {
     apiDocumentationEndpoint(){
       return `${process.env.VUE_APP_API_ENDPOINT}/swagger/index.html?urls.primaryName=Suggestion API - Version ${this.apiVersion}`
@@ -166,6 +158,10 @@ export default {
           console.log(errors);
         });
     },
+    refreshData(){
+      if(this.query != "")
+        this.fetchData()
+    },
     resetData() {
       let self = this;
       self.$axios
@@ -196,12 +192,14 @@ export default {
     },
     predifinedQuery1() {
       this.query = "londo";
+      this.latitude = "";
+      this.longitude = "";
       this.maxResults = "10";
     },
     predifinedQuery2() {
       this.query = "Londo";
-      this.latitude = "42.98339";
-      this.longitude = "-81.23304";
+      this.latitude = "43.70011";
+      this.longitude = "-79.4163";
       this.maxResults = "10";
     },
     predifinedQuery3() {

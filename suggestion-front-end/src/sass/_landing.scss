@@ -57,18 +57,28 @@
 
 					p {
 						font-weight: 600;
-						width: 75%;
+						width: 90%;
 						padding-left: 10px;
 					}
 
 					input {
-						width: 75%;
+						width: 90%;
 						border: 1px solid gray;
 						border-radius: 25px;
 						padding: 5px 5px 5px 10px;
 						background: whitesmoke;
 						font-family: 'Source Sans Pro', sans-serif;
 						font-weight: 600;
+					}
+				}
+
+				.col-refresh{
+					display: flex;
+					justify-content: center;
+					align-items: end;
+
+					.button-refresh{
+						height: 40px;
 					}
 				}
 			}
