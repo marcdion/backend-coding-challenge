@@ -1,7 +1,7 @@
 <template>
   <div class="landing-container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="/">Suggestion API</a>
+      <a id="home-link" class="navbar-brand" href="/">Suggestion API</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" :href="apiDocumentationEndpoint" target="_blank">API documentation</a>
+            <a id="api-documentation-link" class="nav-link" :href="apiDocumentationEndpoint" target="_blank">API documentation</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -29,12 +29,12 @@
               aria-expanded="false"
             >{{`Currently using API version ${apiVersion}`}}</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#" v-on:click="setApiVersion('1.0')">1.0</a>
-              <a class="dropdown-item" href="#" v-on:click="setApiVersion('2.0')">2.0</a>
+              <a id="set-api-v1" class="dropdown-item" href="#" v-on:click="setApiVersion('1.0')">1.0</a>
+              <a id="set-api-v2" class="dropdown-item" href="#" v-on:click="setApiVersion('2.0')">2.0</a>
             </div>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-dark" v-on:click="resetData()">Reset data</button>
+            <button id="button-reset" type="button" class="btn btn-dark" v-on:click="resetData()">Reset data</button>
           </li>
         </ul>
       </div>
@@ -59,7 +59,7 @@
               <input type="text" id="max-results" name="max-results" v-model="maxResults" />
             </div>
             <div class="col-lg-3 col-refresh">
-              <button type="button" class="btn btn-dark button-refresh" v-on:click="refreshData()">Refresh data</button>
+              <button type="button" id="button-refresh" class="btn btn-dark button-refresh" v-on:click="refreshData()">Refresh data</button>
             </div>
           </div>
         </div>
@@ -69,6 +69,7 @@
           <div class="row predifined-queries">
             <div class="col">
               <button
+                id="predifined-query-1"
                 type="button"
                 class="btn btn-dark"
                 v-on:click="predifinedQuery1()"
@@ -76,6 +77,7 @@
             </div>
             <div class="col">
               <button
+                id="predifined-query-2"
                 type="button"
                 class="btn btn-dark"
                 v-on:click="predifinedQuery2()"
@@ -83,6 +85,7 @@
             </div>
             <div class="col">
               <button
+                id="predifined-query-3"
                 type="button"
                 class="btn btn-dark"
                 v-on:click="predifinedQuery3()"

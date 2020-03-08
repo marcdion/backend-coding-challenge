@@ -13,6 +13,7 @@
       </thead>
       <tbody>
         <suggestion-table-item
+          id="suggestion-table-item"
           v-for="(suggestion, index) in results"
           :key="index"
           :result="suggestion"

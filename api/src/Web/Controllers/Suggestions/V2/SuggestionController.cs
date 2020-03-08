@@ -49,7 +49,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
             
             //Fetch suggestions
             var results = _trie.Trie.GetSuggestionsForPrefix(SanitizeInput(q)).ToList();
-
+            
             //Add score to values
             var coords = new GeographicalLocation(latitude, longitude);
             if (coords.AreCoordinatesValid())
