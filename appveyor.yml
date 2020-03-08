@@ -36,7 +36,7 @@ build_script:
 #-------------------------#   
 
 artifacts:
-    - path: '\api\src\bin\Debug\netcoreapp3.1\publish'
+    - path: '\api\src\bin\Any CPU\Release\netcoreapp3.1\publish'
       name: SuggestionAPI
       type: WebDeployPackage
 
