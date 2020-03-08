@@ -4,10 +4,10 @@
 
 #version format
 version: 1.0.{build}-{branch}
+image: Visual Studio 2019
 
 #branches to build
 branches:
-    #whitelist
     only:
         - master
 
@@ -16,22 +16,13 @@ branches:
 #---------------------------#
 
 clone_depth: 1
-
-image: Visual Studio 2019
-
-cache:
-    - '%LocalAppData%\NuGet\Cache'
-    - '%LocalAppData%\NuGet\v3-cache'
-
 init:
     - cmd: git config --global core.autocrlf true
 
 #---------------------#
 # build configuration #
 #---------------------#
-
 platform: Any CPU
-
 configuration: Release
 
 before_build:
