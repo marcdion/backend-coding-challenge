@@ -46,7 +46,7 @@ artifacts:
 
 deploy:
     - provider: WebDeploy
-      server: https://waws-prod-blu-161.publish.azurewebsites.windows.net:443/msdeploy.axd?site=api-suggestion-md
+      server: waws-prod-blu-161.publish.azurewebsites.windows.net:443/msdeploy.axd?site=api-suggestion-md
       website: api-suggestion-md
       username: $api-suggestion-md
       password:
