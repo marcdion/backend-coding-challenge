@@ -1,4 +1,4 @@
-# Technologies
+# Technologies used
 
 Front-end
 
