@@ -30,7 +30,7 @@ init:
 # build configuration #
 #---------------------#
 
-patform: Any CPU
+platform: Any CPU
 
 configuration: Release
 
