@@ -1,1 +1,1 @@
-# Scoring
+# Scoring algorithm

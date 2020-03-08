@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -66,11 +69,6 @@ namespace SuggestionApi.Web.Startup
                     Version = "Version 1.0",
                     Title = "Suggestions API documentation",
                     Description = "This API provides auto complete suggestions for location search",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Marc-Antoine Dion",
-                        Email = "marc-antoine.dion@gmddeveloppement.com"
-                    }
                 });
                 
                 c.SwaggerDoc("2.0", new OpenApiInfo
@@ -78,12 +76,12 @@ namespace SuggestionApi.Web.Startup
                     Version = "Version 2.0",
                     Title = "Suggestions API documentation",
                     Description = "This API provides auto complete suggestions for location search",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Marc-Antoine Dion",
-                        Email = "marc-antoine.dion@gmddeveloppement.com"
-                    }
                 });
+                
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 

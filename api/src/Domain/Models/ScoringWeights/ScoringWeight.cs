@@ -1,6 +1,8 @@
 namespace SuggestionApi.Domain.Models.ScoringWeights
 {
-    // See ADR-004 and Scoring docs for more information about the Scoring algorithm
+    /// <summary>
+    /// See ADR-004 and Scoring docs for more information about the Scoring algorithm
+    /// </summary>
     public class ScoringWeight
     {
         public ScoringWeight(double populationScoreWeight, double popularityScoreWeight,

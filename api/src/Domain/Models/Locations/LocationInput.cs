@@ -3,6 +3,9 @@ using CsvHelper.Configuration.Attributes;
 
 namespace SuggestionApi.Domain.Models.Locations
 {
+    /// <summary>
+    /// Location information that is imported from the TSV file with CSV Helper
+    /// </summary>
     public class LocationInput
     {
         [Name("ascii")]

@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SuggestionApi.Appplication.Suggestions.Dto;
+using SuggestionApi.Application.Suggestions.Dto;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -33,6 +33,23 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
             _scoringDomainService = scoringDomainService;
         }
 
+        /// <summary>
+        /// Generates an array of location suggestions
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /suggestions
+        ///     {
+        ///        "q": London,
+        ///        "latitude": "43.70011",
+        ///        "longitude": -79.4163,
+        ///        "n": 3
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns array of suggestions</response>
+        /// <response code="400">Latitude and/or longitude format is bad</response>
         [HttpGet]        
         public List<SuggestionDto> GetSuggestions(string q, double? latitude, double? longitude, int? n)
         {

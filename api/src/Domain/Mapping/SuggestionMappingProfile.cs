@@ -1,6 +1,6 @@
 using System;
 using AutoMapper;
-using SuggestionApi.Appplication.Suggestions.Dto;
+using SuggestionApi.Application.Suggestions.Dto;
 using SuggestionApi.Domain.Models.Suggestions;
 
 namespace SuggestionApi.Domain.Mapping

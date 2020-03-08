@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using SuggestionApi.Appplication.Suggestions.Dto;
+using SuggestionApi.Application.Suggestions.Dto;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.EditDistance;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.PopularityScore;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.PopulationScore;
 using SuggestionApi.Domain.Helpers.Scoring.Parameters.TravelDistance;
 using SuggestionApi.Domain.Models.Locations;
-using SuggestionApi.Domain.Models.ScoringWeights;
 using SuggestionApi.Domain.Models.Suggestions;
 
 namespace SuggestionApi.Domain.Helpers.Scoring
@@ -16,27 +14,27 @@ namespace SuggestionApi.Domain.Helpers.Scoring
     public class ScoringDomainService : IScoringDomainService
     {
         private readonly IMapper _mapper;
-        private readonly SharedScoringWeight _scoringWeight;
         private readonly ILogarithmicEditDistanceFactory _editDistanceFactory;
         private readonly ILogarithmicPopularityScoreFactory _popularityScoreFactory;
         private readonly ILogarithmicPopulationScoreFactory _populationScoreFactory;
         private readonly ITravelDistanceScoreFactory _travelDistanceScoreFactory;
 
         public ScoringDomainService(IMapper mapper, 
-            SharedScoringWeight scoringWeight, 
             ILogarithmicEditDistanceFactory editDistanceFactory, 
             ILogarithmicPopularityScoreFactory popularityScoreFactory, 
             ILogarithmicPopulationScoreFactory populationScoreFactory, 
             ITravelDistanceScoreFactory travelDistanceScoreFactory)
         {
             _mapper = mapper;
-            _scoringWeight = scoringWeight;
             _editDistanceFactory = editDistanceFactory;
             _popularityScoreFactory = popularityScoreFactory;
             _populationScoreFactory = populationScoreFactory;
             _travelDistanceScoreFactory = travelDistanceScoreFactory;
         }
 
+        /// <summary>
+        /// Generates weighted scores for list of auto complete suggestions
+        /// </summary>
         public List<SuggestionDto> WeightedSuggestions(List<Suggestion> suggestions, int maxValues)
         {
             var weightedSuggestions = new List<SuggestionDto>();
@@ -55,6 +53,10 @@ namespace SuggestionApi.Domain.Helpers.Scoring
             return weightedSuggestions.OrderByDescending(q => q.Score).Take(maxValues).ToList();
         }
 
+        /// <summary>
+        /// Generates weighted scores for list of auto complete suggestions.
+        /// It takes into account the coordinates supplied in the query
+        /// </summary>
         public List<SuggestionDto> WeightedSuggestionsWithCoordinates(List<Suggestion> suggestions, int maxValues, GeographicalLocation location)
         {
             var weightedSuggestions = new List<SuggestionDto>();

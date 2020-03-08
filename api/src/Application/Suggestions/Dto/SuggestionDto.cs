@@ -1,4 +1,4 @@
-namespace SuggestionApi.Appplication.Suggestions.Dto
+namespace SuggestionApi.Application.Suggestions.Dto
 {
     public class SuggestionDto
     {
