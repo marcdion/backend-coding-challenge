@@ -6,6 +6,7 @@ Front-end
     Jest
     TestCafé
     Netlify
+    TypeScript
 
 Back-end
 
