@@ -1,36 +1,68 @@
+#-----------------------#
+# general configuration #
+#-----------------------#
+
+#version format
 version: 1.0.{build}-{branch}
+
+#branches to build
+branches:
+    #whitelist
+    only:
+        - master
+
+#---------------------------#
+# environment configuration #
+#---------------------------#
+
+clone_depth: 1
+
 image: Visual Studio 2019
 
-branches:
-    only:
-      - master
+cache:
+    - '%LocalAppData%\NuGet\Cache'
+    - '%LocalAppData%\NuGet\v3-cache'
 
 init:
     - cmd: git config --global core.autocrlf true
 
-before_build:
-    # Display .NET Core version
-    - cmd: dotnet --version
-    # Display minimal restore text
-    - cmd: dotnet restore ./api/src/SuggestionAPI.csproj --verbosity m
+#---------------------#
+# build configuration #
+#---------------------#
 
+patform: Any CPU
+
+configuration: Release
+
+before_build:
+    - cmd: dotnet --version
+    - cmd: dotnet restore ./api/src/SuggestionAPI.csproj --verbosity m
 build_script:
-    # output will be in ./src/bin/debug/netcoreapp3.1/publish
     - cmd: dotnet publish ./api/src/SuggestionAPI.csproj
+
+#-------------------------#
+# artifacts configuration #
+#-------------------------#   
 
 artifacts:
     - path: '\api\src\bin\Debug\netcoreapp3.1\publish'
       name: SuggestionAPI
-        
-clone_depth: 1
+      type: WebDeployPackage
 
-test_script:
-    # restore packages for our unit tests
-    #- cmd: dotnet restore ./api/tests/tests.csproj --verbosity m
-    # run the unit tests (requires changing into the test directory)
-    #- cmd: cd /api/tests
-    #- cmd: dotnet xunit
+#--------------------------#
+# deployment configuration #
+#--------------------------#   
 
 deploy:
-    - provider: Environment
-      name: suggestion-api-production
+    - provider: WebDeploy
+      server: https://api-suggestion-md.scm.azurewebsites.net/msdeploy.axd?site=api-suggestion-md
+      website: api-suggestion-md
+      username: $api-suggestion-md
+      password:
+        secure: i8svI8V+cPXExad6TQK1ktC1Lk2tBDy89Z5oRemjTJAwCYKoL6wt1bSB1lqA92QQjqn7JkXQ8TdBgWGi2ODtKw==
+      artifact: SuggestionAPI
+      aspnet_core: true
+      app_offline: true
+      do_not_use_checksum: true
+      aspnet_core_force_restart: true
+
