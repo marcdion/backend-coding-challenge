@@ -5,7 +5,7 @@
          <th>{{result.latitude}}</th>
          <th>{{result.longitude}}</th>
          <th>{{result.score}}</th>
-         <a class="suggestion-item-link" :href="addressLink" target="_blank">
+         <a :id="gMapsId" class="suggestion-item-link" :href="addressLink" target="_blank">
             <th class="suggestion-item-th">...</th>
          </a>
     </tr>
@@ -33,6 +33,9 @@
                     return `https://www.google.com/maps/search/?api=1&query=${this.result.latitude},${this.result.longitude}`
                 else
                     return 'https://www.google.com/maps'
+            },
+            gMapsId(){
+                return `suggestion-item-link-${this.index}`
             }
         }
     }

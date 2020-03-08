@@ -1,3 +1,4 @@
+using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 
 namespace SuggestionApi.Domain.Models.Locations

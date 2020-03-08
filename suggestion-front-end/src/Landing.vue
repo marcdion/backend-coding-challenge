@@ -1,7 +1,7 @@
 <template>
   <div class="landing-container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="/">Suggestion API</a>
+      <a id="home-link" class="navbar-brand" href="/">Suggestion API</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" :href="apiDocumentationEndpoint" target="_blank">API documentation</a>
+            <a id="api-documentation-link" class="nav-link" :href="apiDocumentationEndpoint" target="_blank">API documentation</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -29,12 +29,12 @@
               aria-expanded="false"
             >{{`Currently using API version ${apiVersion}`}}</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#" v-on:click="setApiVersion('1.0')">1.0</a>
-              <a class="dropdown-item" href="#" v-on:click="setApiVersion('2.0')">2.0</a>
+              <a id="set-api-v1" class="dropdown-item" href="#" v-on:click="setApiVersion('1.0')">1.0</a>
+              <a id="set-api-v2" class="dropdown-item" href="#" v-on:click="setApiVersion('2.0')">2.0</a>
             </div>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-dark" v-on:click="resetData()">Reset data</button>
+            <button id="button-reset" type="button" class="btn btn-dark" v-on:click="resetData()">Reset data</button>
           </li>
         </ul>
       </div>
@@ -46,17 +46,20 @@
         <div class="additional-parameters-container">
           <h4>Additionnal parameters:</h4>
           <div class="row additional-parameters">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <p>Latitude :</p>
               <input type="text" id="latitude" name="latitude" v-model="latitude" />
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <p>Longitude :</p>
               <input type="text" id="longitude" name="longitude" v-model="longitude" />
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <p>Max results :</p>
               <input type="text" id="max-results" name="max-results" v-model="maxResults" />
+            </div>
+            <div class="col-lg-3 col-refresh">
+              <button type="button" id="button-refresh" class="btn btn-dark button-refresh" v-on:click="refreshData()">Refresh data</button>
             </div>
           </div>
         </div>
@@ -66,6 +69,7 @@
           <div class="row predifined-queries">
             <div class="col">
               <button
+                id="predifined-query-1"
                 type="button"
                 class="btn btn-dark"
                 v-on:click="predifinedQuery1()"
@@ -73,6 +77,7 @@
             </div>
             <div class="col">
               <button
+                id="predifined-query-2"
                 type="button"
                 class="btn btn-dark"
                 v-on:click="predifinedQuery2()"
@@ -80,6 +85,7 @@
             </div>
             <div class="col">
               <button
+                id="predifined-query-3"
                 type="button"
                 class="btn btn-dark"
                 v-on:click="predifinedQuery3()"
@@ -118,17 +124,6 @@ export default {
       responseTime: 0
     };
   },
-  watch: {
-    latitude: function() {
-      this.fetchData();
-    },
-    longitude: function() {
-      this.fetchData();
-    },
-    maxResults: function() {
-      this.fetchData();
-    }
-  },
   computed: {
     apiDocumentationEndpoint(){
       return `${process.env.VUE_APP_API_ENDPOINT}/swagger/index.html?urls.primaryName=Suggestion API - Version ${this.apiVersion}`
@@ -166,6 +161,10 @@ export default {
           console.log(errors);
         });
     },
+    refreshData(){
+      if(this.query != "")
+        this.fetchData()
+    },
     resetData() {
       let self = this;
       self.$axios
@@ -196,12 +195,14 @@ export default {
     },
     predifinedQuery1() {
       this.query = "londo";
+      this.latitude = "";
+      this.longitude = "";
       this.maxResults = "10";
     },
     predifinedQuery2() {
       this.query = "Londo";
-      this.latitude = "42.98339";
-      this.longitude = "-81.23304";
+      this.latitude = "43.70011";
+      this.longitude = "-79.4163";
       this.maxResults = "10";
     },
     predifinedQuery3() {

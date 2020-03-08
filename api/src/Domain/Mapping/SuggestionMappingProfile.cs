@@ -10,7 +10,8 @@ namespace SuggestionApi.Domain.Mapping
         public SuggestionMappingProfile()
         {
             CreateMap<Suggestion, SuggestionDto>()
-                .ForMember(b => b.Score, map => map.MapFrom(b => Math.Round(b.BaseScore, 5)));
+                .ForMember(b => b.Score, map => map.MapFrom(b => Math.Round(b.WeightedScore, 5)))
+                .ForMember(b => b.Name, map => map.MapFrom(b => b.FullName));
         }
     }
 }

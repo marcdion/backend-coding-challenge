@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SuggestionApi.Appplication.Suggestions.Dto;
-using SuggestionApi.Domain.Helpers.Geo;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -19,21 +18,18 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V1
         private readonly ILogger<SuggestionController> _logger;
         private readonly ISeedDomainService _seedDomainService;
         private readonly IScoringDomainService _scoringDomainService;
-        private readonly IGeoDomainService _geoDomainService;
         private readonly SharedTrie _trie;
 
         public SuggestionController(
             ILogger<SuggestionController> logger, 
             SharedTrie trie, 
             ISeedDomainService seedDomainService, 
-            IScoringDomainService scoringDomainService, 
-            IGeoDomainService geoDomainService)
+            IScoringDomainService scoringDomainService)
         {
             _logger = logger;
             _trie = trie;
             _seedDomainService = seedDomainService;
             _scoringDomainService = scoringDomainService;
-            _geoDomainService = geoDomainService;
         }
 
         [HttpGet]        

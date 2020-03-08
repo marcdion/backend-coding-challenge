@@ -7,8 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SuggestionApi.Domain.Helpers.Geo;
 using SuggestionApi.Domain.Helpers.Scoring;
+using SuggestionApi.Domain.Helpers.Scoring.Parameters.EditDistance;
+using SuggestionApi.Domain.Helpers.Scoring.Parameters.PopularityScore;
+using SuggestionApi.Domain.Helpers.Scoring.Parameters.PopulationScore;
+using SuggestionApi.Domain.Helpers.Scoring.Parameters.TravelDistance;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
 using SuggestionApi.Domain.Models.ScoringWeights;
@@ -48,9 +51,13 @@ namespace SuggestionApi.Web.Startup
             //Adding services
             services.AddSingleton<ISeedDomainService, SeedDomainService>();
             services.AddSingleton<IScoringDomainService, ScoringDomainService>();
-            services.AddSingleton<IGeoDomainService, GeoDomainService>();
             services.AddSingleton<SharedTrie>();
             services.AddSingleton<SharedScoringWeight>();
+            
+            services.AddSingleton<ILogarithmicEditDistanceFactory, LogarithmicEditDistanceFactory>();
+            services.AddSingleton<ILogarithmicPopularityScoreFactory, LogarithmicPopularityScoreFactory>();
+            services.AddSingleton<ILogarithmicPopulationScoreFactory, LogarithmicPopulationScoreFactoryFactory>();
+            services.AddSingleton<ITravelDistanceScoreFactory, TravelDistanceScoreFactory>();
 
             services.AddSwaggerGen(c =>
             {
