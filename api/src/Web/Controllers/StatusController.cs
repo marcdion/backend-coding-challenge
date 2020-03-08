@@ -22,7 +22,7 @@ namespace SuggestionApi.Web.Controllers
         /// <summary>
         /// Returns the API status for Uptime Robot
         /// </summary>
-        /// <response code="200">Data has been seeded successfully</response>
+        /// <response code="200">Data has been seeded successfully!</response>
         [HttpGet]
         public StatusDto Status()
         {
