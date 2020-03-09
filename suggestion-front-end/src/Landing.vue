@@ -220,7 +220,7 @@ export default {
           headers: { "api-version": self.apiVersion }
         })
         .then(response => {
-          console.log(`API status: ${response.status} !`)
+          console.log(`API status: ${response.data.status} !`)
         })
         .catch(errors => {
           console.log(errors);
