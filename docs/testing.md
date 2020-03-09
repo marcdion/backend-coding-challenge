@@ -4,4 +4,4 @@ Front end tests are run with TestCafé and are written in TypeScript. You can ru
 
  ``` npm run test ```
 
-The aim of this test suite is to validate basic functionnalities of the application! These tests are not run in the CI process because it is complicated to run intergration tests outside of Docker in the CI!
+The aim of this test suite is to validate basic functionnalities of the application! These tests are not run in the CI process because it is complicated to run intergration tests outside of Docker in the CI.
