@@ -3,7 +3,6 @@ import App from './Landing.vue'
 import router from './router'
 
 import Axios from 'axios'
-import Utils from './utils'
 import Toasted from 'vue-toasted';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -17,7 +16,6 @@ Axios.defaults.withCredentials = false;
 Vue.config.productionTip = false
 
 //Instance properties
-Vue.prototype.$u = Utils;
 Vue.prototype.$axios = Axios;
 
 Vue.use(Toasted)
