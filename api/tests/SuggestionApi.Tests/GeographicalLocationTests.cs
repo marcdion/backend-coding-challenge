@@ -4,14 +4,14 @@ using Xunit;
 
 namespace SuggestionApi.Tests
 {
-    public class GeographicalLocationTest
+    public class GeographicalLocationTess
     {
         [Fact]
         public void GeographicalLocation_ShouldInitializeProperly()
         {
             // Arrange
-            var lat = 43.70011;
-            var lon = -79.4163;
+            const double lat = 43.70011;
+            const double lon = -79.4163;
             
             //Act
             var coords = new GeographicalLocation(lat, lon);

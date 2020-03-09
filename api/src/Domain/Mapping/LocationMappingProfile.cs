@@ -3,9 +3,9 @@ using SuggestionApi.Domain.Models.Locations;
 
 namespace SuggestionApi.Domain.Mapping
 {
-    public class GeoNameMappingProfile : Profile
+    public class LocationMappingProfile : Profile
     {
-        public GeoNameMappingProfile()
+        public LocationMappingProfile()
         {
             CreateMap<LocationInput, Location>()
                 .ForMember(b => b.Name, map => map.MapFrom(b => b.Name.Trim()))

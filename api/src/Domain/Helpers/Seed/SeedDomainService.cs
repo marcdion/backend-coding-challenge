@@ -22,22 +22,22 @@ namespace SuggestionApi.Domain.Helpers.Seed
             _mapper = mapper;
         }
 
-        const string geoFileName = "cities_canada-usa.tsv";
+        const string locationFileName = "cities_canada-usa.tsv";
 
         public void SeedPrefixTree()
         {
-            using (var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, @$"..\..\api\src\Domain\DataSource\{geoFileName}"), Encoding.GetEncoding("iso-8859-1")))
+            using (var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, @$"..\..\api\src\Domain\DataSource\{locationFileName}"), Encoding.GetEncoding("iso-8859-1")))
             {
                 using var csv = new CsvReader(reader, CultureInfo.CurrentCulture);
                 csv.Configuration.Delimiter = "\t";
                 csv.Configuration.HasHeaderRecord = true;
-                var geoNames = csv.GetRecords<LocationInput>();
+                var locations = csv.GetRecords<LocationInput>();
                 
                 // We want to order the locations by the population size. See ADR-002.md for details
-                var orderedGeoNames = geoNames.OrderByDescending(q => q.Population).ToList();
+                var orderedLocations = locations.OrderByDescending(q => q.Population).ToList();
 
-                foreach (var geoName in orderedGeoNames)
-                    _trie.Trie.Insert(_mapper.Map<Location>(geoName));
+                foreach (var locationInput in orderedLocations)
+                    _trie.Trie.Insert(_mapper.Map<Location>(locationInput));
             }
         }
 
