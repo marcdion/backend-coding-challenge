@@ -46,7 +46,7 @@ artifacts:
 
 deploy:
     - provider: WebDeploy
-      server: api-suggestion-md.scm.azurewebsites.net:443/msdeploy.axd?site=api-suggestion-md
+      server: https://api-suggestion-md.scm.azurewebsites.net/msdeploy.axd?site=api-suggestion-md
       website: api-suggestion-md
       username: $api-suggestion-md
       password:
