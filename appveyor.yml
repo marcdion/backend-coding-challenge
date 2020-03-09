@@ -48,9 +48,9 @@ deploy:
     - provider: WebDeploy
       server: api-suggestion-md.scm.azurewebsites.net/msdeploy.axd?site=api-suggestion-md
       website: api-suggestion-md
-      username: $api-suggestion-md
+      username: marc-antoine_dion@anciens-mss.ca
       password:
-        secure: i8svI8V+cPXExad6TQK1ktC1Lk2tBDy89Z5oRemjTJAwCYKoL6wt1bSB1lqA92QQjqn7JkXQ8TdBgWGi2ODtKw==
+        secure: QiqujYnCFBu2rjxHdBJj
       artifact: SuggestionAPI
       aspnet_core: true
       app_offline: true
