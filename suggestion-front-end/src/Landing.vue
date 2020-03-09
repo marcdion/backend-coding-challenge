@@ -211,6 +211,20 @@ export default {
       this.longitude = "-74.00597";
       this.maxResults = "3";
     }
+  },
+
+  mounted(){
+     let self = this;
+      self.$axios
+        .get("/status", {
+          headers: { "api-version": self.apiVersion }
+        })
+        .then(response => {
+          console.log(`API status: ${response.status} !`)
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
   }
 };
 </script>
