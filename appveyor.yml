@@ -14,7 +14,6 @@ branches:
 #---------------------------#
 # environment configuration #
 #---------------------------#
-
 clone_depth: 1
 init:
     - cmd: git config --global core.autocrlf true
@@ -28,7 +27,7 @@ configuration: Release
 before_build:
     - cmd: dotnet --version
     - cmd: dotnet restore ./api/src/SuggestionAPI.csproj --verbosity m
-    
+
 build_script:
     - cmd: dotnet publish ./api/src/SuggestionAPI.csproj
 
