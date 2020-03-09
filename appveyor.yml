@@ -1,36 +1,50 @@
-version: 1.0.{build}-{branch}
-image: Visual Studio 2017
+#-----------------------#
+# general configuration #
+#-----------------------#
 
+#version format
+version: 1.0.{build}-{branch}
+image: Visual Studio 2019
+
+#branches to build
 branches:
     only:
-      - master
+        - master
 
+#---------------------------#
+# environment configuration #
+#---------------------------#
+clone_depth: 1
 init:
-    # Good practise, because Windows line endings are different from Unix/Linux ones
     - cmd: git config --global core.autocrlf true
 
+#---------------------#
+# build configuration #
+#---------------------#
+platform: Any CPU
+configuration: Release
+
 before_build:
-    # Display .NET Core version
     - cmd: dotnet --version
-    # Display minimal restore text
-    - cmd: dotnet restore ./api/src/src.csproj --verbosity m
+    - cmd: dotnet restore ./api/src/SuggestionAPI.csproj --verbosity m
 
 build_script:
-    # output will be in ./src/bin/debug/netcoreapp3.1/publish
-    - cmd: dotnet publish ./api/src/src.csproj
+    - cmd: dotnet publish ./api/src/SuggestionAPI.csproj
+
+#-------------------------#
+# artifacts configuration #
+#-------------------------#   
 
 artifacts:
-    - path: '\api\src\bin\Debug\netcoreapp3.1\publish'
-        name: SuggestionAPI
-        type: WebDeployPackage
-        
-clone_depth: 1
+    - path: '\api\src\bin\Any CPU\Release\netcoreapp3.1\publish'
+      name: SuggestionAPI
+      type: WebDeployPackage    
 
-test_script:
-    # restore packages for our unit tests
-    #- cmd: dotnet restore ./api/tests/tests.csproj --verbosity m
-    # run the unit tests (requires changing into the test directory)
-    #- cmd: cd /api/tests
-    #- cmd: dotnet xunit
+#--------------------------#
+# deployment configuration #
+#--------------------------#   
 
-deploy: off
+deploy:
+    - provider: Environment
+      name: suggestion-api-production
+

@@ -1,8 +1,12 @@
 # Coveo Backend Coding Challenge
 (inspired by https://github.com/busbud/coding-challenge-backend-c)
 
-## URL
+## Application URL
 [https://suggestion.marcantoinedion.com](https://suggestion.marcantoinedion.com)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/22b9242b-41fc-43e1-96a5-9ca3ef92556f/deploy-status)](https://app.netlify.com/sites/adoring-feynman-e2f640/deploys)
+
+[![Appveyor status](https://ci.appveyor.com/api/projects/status/624yt5hx9dbll1pl/branch/master?svg=true)](https://ci.appveyor.com/project/marcdino/suggestion-api-production/branch/master)
 
 ### Table of contents
 

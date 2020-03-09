@@ -1,4 +1,4 @@
-# Technologies
+# Technologies used
 
 Front-end
 
@@ -6,6 +6,7 @@ Front-end
     Jest
     TestCafé
     Netlify
+    TypeScript
 
 Back-end
 
