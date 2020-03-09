@@ -155,7 +155,8 @@ export default {
         })
         .then(response => {
           self.responseTime = Date.now() - start;
-          self.results = response.data;
+          if(response.status == 200)
+            self.results = response.data;
         })
         .catch(errors => {
           console.log(errors);
@@ -220,7 +221,7 @@ export default {
           headers: { "api-version": self.apiVersion }
         })
         .then(response => {
-          console.log(`API status: ${response.data.status} !`)
+          console.log(`API status: ${response.data.message} !`)
         })
         .catch(errors => {
           console.log(errors);

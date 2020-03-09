@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SuggestionApi.Application.Suggestions.Dto;
+using SuggestionApi.Domain.ErrorHandling;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -49,10 +50,10 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V1
         /// <response code="200">Returns array of suggestions</response>
         /// <response code="400">Latitude and/or longitude format is bad</response>
         [HttpGet]        
-        public List<SuggestionDto> GetSuggestions(string q, double? latitude, double? longitude, int? n)
+        public IActionResult GetSuggestions(string q, double? latitude, double? longitude, int? n)
         {
             //To implement
-            return new List<SuggestionDto>();
+            return BadRequest(new BadRequestError("This API endpoint is deprecated"));
         }
     }
 }
