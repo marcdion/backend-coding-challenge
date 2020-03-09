@@ -37,7 +37,7 @@ namespace SuggestionApi.Web.Controllers
             
             return new StatusDto
             {
-                Status = "Everything is fine!",
+                Status = "Everything is working fine!",
             };
         }
     }
