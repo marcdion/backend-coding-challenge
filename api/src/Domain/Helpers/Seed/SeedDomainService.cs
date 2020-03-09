@@ -26,7 +26,7 @@ namespace SuggestionApi.Domain.Helpers.Seed
 
         public void SeedPrefixTree()
         {
-            using (var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, @$"..\..\api\src\Domain\DataSource\{locationFileName}"), Encoding.GetEncoding("iso-8859-1")))
+            using (var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, @$"{locationFileName}"), Encoding.GetEncoding("iso-8859-1")))
             {
                 using var csv = new CsvReader(reader, CultureInfo.CurrentCulture);
                 csv.Configuration.Delimiter = "\t";
