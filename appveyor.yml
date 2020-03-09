@@ -38,7 +38,7 @@ build_script:
 artifacts:
     - path: '\api\src\bin\Any CPU\Release\netcoreapp3.1\publish'
       name: SuggestionAPI
-      type: WebDeployPackage
+      type: WebDeployPackage    
 
 #--------------------------#
 # deployment configuration #
@@ -46,7 +46,7 @@ artifacts:
 
 deploy:
     - provider: WebDeploy
-      server: api-suggestion-md.scm.azurewebsites.net/msdeploy.axd?site=api-suggestion-md
+      server: api-suggestion-md.scm.azurewebsites.net:443/msdeploy.axd?site=api-suggestion-md
       website: api-suggestion-md
       username: $api-suggestion-md
       password:
