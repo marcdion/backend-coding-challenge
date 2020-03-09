@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SuggestionApi.Application.Suggestions.Dto;
+using SuggestionApi.Domain.ErrorHandling;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -51,12 +52,12 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
         /// <response code="200">Returns array of suggestions</response>
         /// <response code="400">Latitude and/or longitude format is bad</response>
         [HttpGet]        
-        public List<SuggestionDto> GetSuggestions(string q, double? latitude, double? longitude, int? n)
+        public IActionResult GetSuggestions(string q, double? latitude, double? longitude, int? n)
         {
             var weightedResults = new List<SuggestionDto>();
             var defaultResultSize = 10;
             if (string.IsNullOrEmpty(q))
-                return weightedResults;
+                return BadRequest(new BadRequestError("The q paramter is mandatory"));
             
             if(_trie.Trie.IsEmpty())
                 _seedDomainService.ResetPrefixTree();
@@ -74,7 +75,7 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
             else
                 weightedResults = _scoringDomainService.WeightedSuggestions(results, defaultResultSize);
 
-            return weightedResults;
+            return Ok(weightedResults);
         }
 
         private string SanitizeInput(string s)
