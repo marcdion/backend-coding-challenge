@@ -12,9 +12,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <_CustomFiles Include="$(MSBuildProjectDirectory)/api/src/Domain/DataSource/cities_canada-usa.tsv" />
-    <DotNetPublishFiles Include="@(_CustomFiles)">
-      <DestinationRelativePath>wwwroot/data/%(Filename)%(Extension)</DestinationRelativePath>
-    </DotNetPublishFiles>
+    <Content Include="cities_canada-usa.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
