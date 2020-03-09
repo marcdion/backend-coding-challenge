@@ -28,6 +28,7 @@ configuration: Release
 before_build:
     - cmd: dotnet --version
     - cmd: dotnet restore ./api/src/SuggestionAPI.csproj --verbosity m
+    
 build_script:
     - cmd: dotnet publish ./api/src/SuggestionAPI.csproj
 
