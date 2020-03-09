@@ -40,6 +40,13 @@ artifacts:
       name: SuggestionAPI
       type: WebDeployPackage    
 
+test_script:
+    # restore packages for our unit tests
+    - cmd: dotnet restore ./api/tests/SuggestionApi.Tests.csproj --verbosity m
+    # run the unit tests (requires changing into the test directory)
+    - cmd: cd /api/tests
+    - cmd: dotnet xunit
+
 #--------------------------#
 # deployment configuration #
 #--------------------------#   
