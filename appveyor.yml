@@ -45,7 +45,7 @@ test_script:
     - cmd: dotnet restore ./api/tests/SuggestionApi.Tests/SuggestionApi.Tests.csproj --verbosity m
     # run the unit tests (requires changing into the test directory)
     - cmd: cd ./api/tests/SuggestionApi.Tests
-    - cmd: dotnet xunit
+    - cmd: dotnet test
 
 #--------------------------#
 # deployment configuration #
