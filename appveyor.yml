@@ -46,11 +46,11 @@ artifacts:
 
 deploy:
     - provider: WebDeploy
-      server: https://api-suggestion-md.scm.azurewebsites.net/msdeploy.axd?site=api-suggestion-md
+      server: api-suggestion-md.scm.azurewebsites.net:443/msdeploy.axd?site=api-suggestion-md
       website: api-suggestion-md
       username: $api-suggestion-md
       password:
-        secure: i8svI8V+cPXExad6TQK1ktC1Lk2tBDy89Z5oRemjTJAwCYKoL6wt1bSB1lqA92QQjqn7JkXQ8TdBgWGi2ODtKw==
+        secure: n7OtqsTKeZ37M6NLhauhtrnaoDp9luZyugflSWEEjd9JmUgT+BlWWQFXNWKDoZHWhI8gW0HWcqLHDmzomc86Ew==
       artifact: SuggestionAPI
       aspnet_core: true
       app_offline: true
