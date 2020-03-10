@@ -44,11 +44,12 @@ export default {
     },
     apiVersion: {
       type: String,
-      defualt: "2.0"
+      default: "2.0"
     }
   },
   computed:{
     noResults(){
+      console.log(this.apiVersion)
       if(this.apiVersion == "2.0")
         return this.$t('noResults')
       else
