@@ -4,11 +4,11 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th>Location name</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Score</th>
-          <th>Details</th>
+          <th>{{$t('locationName')}}</th>
+          <th>{{$t('latitude')}}</th>
+          <th>{{$t('longitude')}}</th>
+          <th>{{$t('score')}}</th>
+          <th>{{$t('details')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +22,7 @@
       </tbody>
     </table>
 
-    <p class="no-results-to-show" v-if="results.length == 0">There are no results to show</p>
+    <p class="no-results-to-show" v-if="results.length == 0">{{$t('noResults')}}</p>
   </div>
 </template>
 

@@ -14,9 +14,6 @@
 <script>
     export default {
     name: 'suggestion-table-item',
-        components: {
-            
-        },
         props: {
             result: {
                 type: Object,
