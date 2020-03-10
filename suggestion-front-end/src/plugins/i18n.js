@@ -32,7 +32,8 @@ const messages = {
         'noResults': "Il n'y a aucun résultat",
 
         'dataWasReset': 'Les données ont été réinitialisées!',
-        'apiVersionChanged': "La version de l'API a été remplacée par"
+        'apiVersionChanged': "La version de l'API a été remplacée par",
+        'deprecated': "Ce version de l'API est obsolète"
     },
 
     'en': {
@@ -63,7 +64,8 @@ const messages = {
         'noResults': 'There are no results to show',
 
         'dataWasReset': 'Data was reset!',
-        'apiVersionChanged': 'API version was changed to '
+        'apiVersionChanged': 'API version was changed to ',
+        'deprecated': "This version of the API is deprecated"
     }
 };
 

@@ -91,7 +91,7 @@
 
       </div>
       <div class="results-container col-sm-12 col-xl-8">
-        <suggestion-table :results="results"></suggestion-table>
+        <suggestion-table :results="results" :api-version="apiVersion"></suggestion-table>
       </div>
     </div>
   </div>
@@ -131,6 +131,10 @@ export default {
     },
     rawApiEndpoint(){
       return `${process.env.VUE_APP_API_ENDPOINT}/suggestions?q=Quebec`
+    },
+    noResults(){
+      if(this.apiVersion == "2.0")
+        return this.$t('')
     }
   },
   methods: {

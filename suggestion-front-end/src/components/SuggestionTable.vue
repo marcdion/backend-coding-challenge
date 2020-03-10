@@ -1,6 +1,7 @@
 <template>
   <div>
     <table class="table suggestion-table">
+      
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -22,7 +23,7 @@
       </tbody>
     </table>
 
-    <p class="no-results-to-show" v-if="results.length == 0">{{$t('noResults')}}</p>
+    <p class="no-results-to-show" v-if="results.length == 0">{{noResults}}</p>
   </div>
 </template>
 
@@ -40,6 +41,18 @@ export default {
       default() {
         return [];
       }
+    },
+    apiVersion: {
+      type: String,
+      defualt: "2.0"
+    }
+  },
+  computed:{
+    noResults(){
+      if(this.apiVersion == "2.0")
+        return this.$t('noResults')
+      else
+        return this.$t('deprecated')
     }
   }
 };
