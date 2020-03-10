@@ -27,7 +27,6 @@ namespace SuggestionApi.Web.Startup
 
                 try
                 {
-                    Console.WriteLine($" ************ dotnet.exe process id: {Process.GetCurrentProcess().Id} ************");
                     seed.SeedPrefixTree();
                     host.Run();
                 }

@@ -14,6 +14,8 @@ Back-end
     Automapper
     CSV helper
     Swagger
+    xUnit
+    Shouldly
 
 Infrastructure
 
