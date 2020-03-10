@@ -132,10 +132,6 @@ export default {
     rawApiEndpoint(){
       return `${process.env.VUE_APP_API_ENDPOINT}/suggestions?q=Quebec`
     },
-    noResults(){
-      if(this.apiVersion == "2.0")
-        return this.$t('')
-    }
   },
   methods: {
     queryChanged(query) {
