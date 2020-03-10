@@ -106,7 +106,6 @@ import PredefinedQueries from "./components/PredefinedQueries.vue";
 import {TheMask} from 'vue-the-mask'
 
 import i18n from '@/plugins/i18n';
-
 const queryMinimumLength = 3;
 
 export default {
@@ -155,6 +154,11 @@ export default {
     },
     fetchData() {
       let self = this;
+
+      if(self.latitude !== "")
+        self.latitude = parseFloat(self.latitude);
+      if(self.longitude !== "")
+        self.longitude = parseFloat(self.longitude);
 
       //Tracking performance
       var start = Date.now();
