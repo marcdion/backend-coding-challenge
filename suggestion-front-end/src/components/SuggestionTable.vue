@@ -1,6 +1,7 @@
 <template>
   <div>
     <table class="table suggestion-table">
+      
       <thead>
         <tr>
           <th scope="col">#</th>
