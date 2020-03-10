@@ -49,7 +49,6 @@ export default {
   },
   computed:{
     noResults(){
-      console.log(this.apiVersion)
       if(this.apiVersion == "2.0")
         return this.$t('noResults')
       else
