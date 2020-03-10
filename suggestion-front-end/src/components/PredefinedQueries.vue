@@ -44,10 +44,6 @@ export default {
     predefinedQuery3(){
         this.$emit("predefinedQuery3")
     }
-  },
-
-  mounted(){
-      console.log(this.$t)
   }
 };
 </script>

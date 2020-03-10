@@ -1,0 +1,64 @@
+.additional-parameters-container {
+    margin-top: 65px;
+
+    h4 {
+        font-weight: 600;
+    }
+
+    .additional-parameters {
+        margin-top: 10px;
+
+        p {
+            font-weight: 600;
+            width: 90%;
+            padding-left: 10px;
+        }
+
+        input {
+            width: 100%;
+            border: 1px solid gray;
+            border-radius: 25px;
+            padding: 5px 5px 5px 10px;
+            background: whitesmoke;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 600;
+
+            @include md {
+                width: 90%;
+            }
+        }
+    }
+
+    .col-refresh{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 15px;
+
+        @include md {
+            margin-top: 0;
+        }
+
+        .button-refresh{
+            height: 40px;
+        }
+    }
+}
+
+.predifined-queries-container{
+    margin-top: 25px;
+
+    h4 {
+        font-weight: 600;
+    }
+
+    .predifined-queries {
+        margin-top: 10px;
+        flex-direction: column;
+
+        button{
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    }
+}

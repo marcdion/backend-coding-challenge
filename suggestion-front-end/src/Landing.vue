@@ -59,7 +59,7 @@
     </nav>
 
     <div class="page-container row">
-      <div class="search-container col-lg-4">
+      <div class="search-container col-sm-12 col-xl-4">
         <search-box @queryChanged="queryChanged" :query="query" :responseTime="responseTime"></search-box>
         <div class="additional-parameters-container">
           <h4>{{$t('additionalParameters')}}</h4>
@@ -87,7 +87,7 @@
                             @predefinedQuery3="predefinedQuery3()">
         </predefined-queries>
       </div>
-      <div class="results-container col-lg-8">
+      <div class="results-container col-sm-12 col-xl-8">
         <suggestion-table :results="results"></suggestion-table>
       </div>
     </div>
