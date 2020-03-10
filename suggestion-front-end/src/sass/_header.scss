@@ -20,5 +20,18 @@
 
     .raw-api-button{
         margin-right: 10px;
+        margin-top: 6px;
+
+        @include lg {
+            margin-top: 0;
+        }
+    }
+
+    #button-reset{
+        margin-top: 10px;
+
+        @include lg {
+            margin-top: 0;
+        }
     }
 }
