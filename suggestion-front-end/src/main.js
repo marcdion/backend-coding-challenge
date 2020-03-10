@@ -4,6 +4,7 @@ import router from './router'
 
 import Axios from 'axios'
 import Toasted from 'vue-toasted';
+import i18n from '@/plugins/i18n';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/sass/_styles.scss';
@@ -22,5 +23,6 @@ Vue.use(Toasted)
 
 new Vue({
   router,
+  i18n,
   render: h => h(App),
 }).$mount('#app')

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SuggestionApi.Application.Suggestions.Dto;
 using SuggestionApi.Domain.ErrorHandling;
+using SuggestionApi.Domain.Extensions;
 using SuggestionApi.Domain.Helpers.Scoring;
 using SuggestionApi.Domain.Helpers.Seed;
 using SuggestionApi.Domain.Models.DataStructure;
@@ -54,34 +55,34 @@ namespace SuggestionApi.Web.Controllers.Suggestions.V2
         [HttpGet]        
         public IActionResult GetSuggestions(string q, double? latitude, double? longitude, int? n)
         {
-            var weightedResults = new List<SuggestionDto>();
+            List<SuggestionDto> weightedResults;
             var defaultResultSize = 10;
-            if (string.IsNullOrEmpty(q))
-                return BadRequest(new BadRequestError("The q paramter is mandatory"));
             
+            // Make sure q does not equal "", ", '', ' and empty
+            if (!q.IsValidInput())
+                return BadRequest(new BadRequestError("The q paramter is mandatory"));
+
             if(_trie.Trie.IsEmpty())
                 _seedDomainService.ResetPrefixTree();
             
             if (n.HasValue && n >= 0)
                 defaultResultSize = n.Value;
             
+            var coords = new GeographicalLocation(latitude, longitude);
+            if(coords.Latitude.HasValue || coords.Longitude.HasValue)
+                if(!coords.AreCoordinatesValid())
+                    return BadRequest(new BadRequestError("Latitude and logitude are not proper format"));
+
             //Fetch suggestions
-            var results = _trie.Trie.GetSuggestionsForPrefix(SanitizeInput(q)).ToList();
+            var results = _trie.Trie.GetSuggestionsForPrefix(q.SanitizeInput()).ToList();
             
             //Add score to values
-            var coords = new GeographicalLocation(latitude, longitude);
             if (coords.AreCoordinatesValid())
                 weightedResults = _scoringDomainService.WeightedSuggestionsWithCoordinates(results, defaultResultSize, coords);
             else
                 weightedResults = _scoringDomainService.WeightedSuggestions(results, defaultResultSize);
 
             return Ok(weightedResults);
-        }
-
-        private string SanitizeInput(string s)
-        {
-            //We are not striping diacritics, see ADR-007
-            return s.Trim().ToLower();
         }
     }
 }

@@ -7,3 +7,4 @@
 - ADR-005 - API Versioning - 06/03/2020                       | [Details here](./ADR-005.md)
 - ADR-006 - Nondeterministic algorithm - 07/03/2020           | [Details here](./ADR-006.md)
 - ADR-007 - Diacritics support - 07/03/2020                   | [Details here](./ADR-007.md)
+- ADR-008 - Error handling - 09/03/2020                       | [Details here](./ADR-008.md)
