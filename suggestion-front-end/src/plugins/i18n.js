@@ -33,7 +33,8 @@ const messages = {
 
         'dataWasReset': 'Les données ont été réinitialisées!',
         'apiVersionChanged': "La version de l'API a été remplacée par",
-        'deprecated': "Ce version de l'API est obsolète"
+        'deprecated': "Ce version de l'API est obsolète",
+        'invalidParams': 'Les paramètres saisies sont ivalides !'
     },
 
     'en': {
@@ -65,7 +66,8 @@ const messages = {
 
         'dataWasReset': 'Data was reset!',
         'apiVersionChanged': 'API version was changed to ',
-        'deprecated': "This version of the API is deprecated"
+        'deprecated': "This version of the API is deprecated",
+        'invalidParams': 'Parameters are invalid !'
     }
 };
 

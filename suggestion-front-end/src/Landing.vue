@@ -76,7 +76,9 @@
             </div>
             <div class="col-lg-3">
               <p>{{$t('maxResults')}}</p>
-              <input type="text" id="max-results" name="max-results" v-model="maxResults" @keypress="isNumber($event)" />
+              <the-mask id="max-results" type="text" name="max-results" v-model="maxResults"
+                  :mask="['###']"
+                  :masked="true"/>
             </div>
             <div class="col-lg-3 col-refresh">
               <button type="button" id="button-refresh" class="btn btn-dark button-refresh" v-on:click="refreshData()">{{$t('refreshData')}}</button>
@@ -101,6 +103,7 @@
 import SearchBox from "./components/SearchBox.vue";
 import SuggestionTable from "./components/SuggestionTable.vue";
 import PredefinedQueries from "./components/PredefinedQueries.vue";
+import {TheMask} from 'vue-the-mask'
 
 import i18n from '@/plugins/i18n';
 
@@ -111,7 +114,8 @@ export default {
   components: {
     SearchBox,
     SuggestionTable,
-    PredefinedQueries
+    PredefinedQueries,
+    TheMask
   },
   data() {
     return {
@@ -135,11 +139,18 @@ export default {
   },
   methods: {
     queryChanged(query) {
-      this.results = [];
-      this.responseTime = 0;
-      if (query.length >= queryMinimumLength) {
-        this.query = query;
-        this.fetchData();
+      let self = this;
+      self.results = [];
+      self.responseTime = 0;
+      if(!self.coordsValid()){
+        self.$toasted.error(self.$t('invalidParams'), {
+            theme: "bubble",
+            position: "bottom-right",
+            duration: 3000
+          });
+      }else if (query.length >= queryMinimumLength) {
+        self.query = query;
+        self.fetchData();
       }
     },
     fetchData() {
@@ -167,8 +178,35 @@ export default {
         });
     },
     refreshData(){
-      if(this.query != "")
-        this.fetchData()
+      let self = this;
+      if(self.query != "" && self.coordsValid())
+        self.fetchData()
+      else{
+        self.$toasted.error(self.$t('invalidParams'), {
+            theme: "bubble",
+            position: "bottom-right",
+            duration: 3000
+          });
+      }
+
+    },
+    coordsValid(){
+      if(this.latitude === "" && this.longitude === "")
+        return true;
+
+      let lat = parseFloat(this.latitude);
+      let lon = parseFloat(this.longitude);
+
+      if(isNaN(lat) || isNaN(lon))
+        return false;
+
+      if (lat < -90 || lat > 90)
+        return false;
+
+      if (lon < -180 || lon > 180)
+        return false;
+
+      return true;
     },
     resetData() {
       let self = this;
@@ -215,14 +253,6 @@ export default {
       this.latitude = "40.71427";
       this.longitude = "-74.00597";
       this.maxResults = "3";
-    },
-    isNumber(evt) {
-      evt = (evt) ? evt : window.event;
-      var charCode = (evt.which) ? evt.which : evt.keyCode;
-      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-          return false;
-      }
-      return true;
     },
     setLocale(locale){
         i18n.locale = locale;
